@@ -7,6 +7,7 @@
      <router-link to="/fund-pages/balanced-fund">Balanced-fund Page</router-link>
      <router-link to="/fund-pages/equity-fund">Equity-fund Page</router-link>
      <router-link to="/fund-pages/stable-fund">Stable-fund Page</router-link>
+     <router-link to="/admin/home">Admin</router-link>
   </div>
 </template>
 

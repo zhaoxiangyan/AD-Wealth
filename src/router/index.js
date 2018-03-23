@@ -45,6 +45,20 @@ export default new Router({
       path: '/fund-pages/stable-fund',
       name: 'stable-fund',
       component: resolve => require(['../components/fund-pages/Stable-fund.vue'], resolve)
+    },
+    {
+      path: '/admin',
+      redirect: '/admin/home'
+    },
+    {
+      path: '/admin/home',
+      component: resolve => require(['../components/admin/Home.vue'], resolve),
+      children: [
+        {
+          path: '/',
+          component: resolve => require(['../components/admin/Pageone.vue'], resolve)
+        }
+      ]
     }
   ]
 })
