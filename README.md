@@ -1,6 +1,6 @@
-# lifeclub
+# ad-wealth
 
-> LifeClub Website
+> AD-Wealth Website
 
 ## Build Setup
 

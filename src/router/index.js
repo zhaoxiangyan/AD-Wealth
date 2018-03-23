@@ -15,6 +15,36 @@ export default new Router({
       path: '/',
       name: 'index',
       component: resolve => require(['../components/index.vue'], resolve)
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: resolve => require(['../components/Login.vue'], resolve)
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: resolve => require(['../components/Register.vue'], resolve)
+    },
+    {
+      path: '/contact-us',
+      name: 'contact-us',
+      component: resolve => require(['../components/Contact-us.vue'], resolve)
+    },
+    {
+      path: '/fund-pages/balanced-fund',
+      name: 'balanced-fund',
+      component: resolve => require(['../components/fund-pages/Balanced-fund.vue'], resolve)
+    },
+    {
+      path: '/fund-pages/equity-fund',
+      name: 'equity-fund',
+      component: resolve => require(['../components/fund-pages/Equity-fund.vue'], resolve)
+    },
+    {
+      path: '/fund-pages/stable-fund',
+      name: 'stable-fund',
+      component: resolve => require(['../components/fund-pages/Stable-fund.vue'], resolve)
     }
   ]
 })

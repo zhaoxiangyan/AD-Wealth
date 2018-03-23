@@ -5,31 +5,31 @@
  </div>
 </template>
 <script>
- export default {
-    name: 'notfound',
-    data() {
+export default {
+  name: 'notfound',
+  data() {
       return {
-		time:'5'
+      time:'5'
       };
-    },
-    mounted() {
-        document.title = "404";
-        this.countDown(); 
-    },
-    methods: {
-       countDown() {
-        var self = this;
-        var _step = 4;
-        var _res = setInterval(function(){
-            self.time = _step;
-            _step-=1;
-            if(_step<=0){
-                self.$router.push('/');
-                clearInterval(_res);
-            }
-        },1000);
-        },
-    }
+  },
+  mounted(){
+    document.title = "404";
+    this.countDown(); 
+  },
+  methods: {
+    countDown() {
+    var self = this;
+    var _step = 4;
+    var _res = setInterval(function(){
+          self.time = _step;
+          _step-=1;
+          if(_step<= 0){
+              self.$router.push('/');
+              clearInterval(_res);
+          }
+      },1000);
+      },
+  }
 }
 </script>
 <style scoped>
