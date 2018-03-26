@@ -3,6 +3,9 @@
         <Layout :style="{minHeight: '100vh'}">
             <Sider collapsible :collapsed-width="78" v-model="isCollapsed">
                 <Menu active-name="1-2" theme="dark" width="auto" :class="menuitemClasses">
+                    <div class="photo_box">
+                       <img src="../../assets/logo.png">
+                    </div>
                     <MenuItem name="1-1">
                         <Icon type="ios-navigate"></Icon>
                         <span>Option 1</span>
@@ -80,5 +83,9 @@
         transition: font-size .2s ease .2s, transform .2s ease .2s;
         vertical-align: middle;
         font-size: 22px;
+    }
+    .photo_box{}
+    .photo_box img{
+        width:100%;
     }
 </style>
