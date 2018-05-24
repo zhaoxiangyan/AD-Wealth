@@ -1,6 +1,11 @@
 <template>
   <div class="pageone">
-     <h3>Page One</h3>
+    <Breadcrumb :style="{margin: '16px 0', textAlign: 'left'}">
+        <BreadcrumbItem>Home</BreadcrumbItem>
+        <BreadcrumbItem>Components</BreadcrumbItem>
+        <BreadcrumbItem>Layout</BreadcrumbItem>
+    </Breadcrumb>
+    <h3>Page One</h3>
   </div>
 </template>
 
