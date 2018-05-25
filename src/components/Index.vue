@@ -14,9 +14,9 @@
             <div class="text_box">
                 <span>
                   <div class="table_cell">
-                    <transition enter-active-class="animated fadeInRightBig" leave-active-class="animated fadeOutLeftBig"><h3 v-show="title">ADW UNIT TRUST</h3></transition>
-                    <transition enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutRightBig"><p v-show="text">Building long-term wealth for our clients</p></transition>
-                    <div class="button_box">
+                    <transition enter-active-class="animated fadeInRightBig" leave-active-class="animated fadeOutLeftBig"><h3 v-show="title" v-text="text1"></h3></transition>
+                    <transition enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutRightBig"><p v-show="text" v-text="text2"></p></transition>
+                    <div class="button_box" :class="first?'first':''">
                         <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDownBig"><a v-show="btn" class="log" href="javascript:void(0)">LOG IN</a></transition>
                         <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDownBig"><a v-show="btn" class="now" href="javascript:void(0)">INVEST NOW</a></transition>
                     </div>
@@ -34,9 +34,13 @@ export default {
   data () {
     return {
       msg: 'Welcome to Your Vue.js App',
+      first:true,
       title:false,
       text:false,
-      btn:false
+      btn:false,
+      text_status: true,
+      text1: 'AD Wealth Inc.',
+      text2: 'Today. Tomorrow. Together.'
     }
   },
   mounted () {
@@ -45,9 +49,28 @@ export default {
     this.$nextTick(()=>{
         this.title = true;
         this.text = true; 
-        // this.btn = true;
+        this.btn = true;
     })
-    setTimeout(function(){self.btn = true},300)
+    // setTimeout(function(){self.btn = true},300)
+    self.first = false;
+    setInterval(function(){
+      self.title = false;
+      self.text = false;
+      self.btn = false;
+      self.text_status = !self.text_status;
+      if(self.text_status){
+        self.text1 = 'AD Wealth Inc.';
+        self.text2 = 'Today. Tomorrow. Together.';
+      }else{
+        self.text1 = 'ADW UNIT TRUST';
+        self.text2 = 'Building long-term wealth for our clients';
+      }
+      setTimeout(function(){
+        self.title = true;
+        self.text = true;
+      },1000)
+      setTimeout(function(){self.btn = true;},2000)
+    },11000)
   }
 }
 </script>
@@ -100,6 +123,7 @@ export default {
 .text_box .button_box{
   margin-top:100px;
   margin-bottom:70px;
+  height:60px;
 }
 .button_box a{
   display:inline-block;
@@ -112,6 +136,9 @@ export default {
   font-weight:bold;
   letter-spacing:1px;
   border-radius:2px;
+}
+.button_box a.first{
+  animation-delay:1s;
 }
 .button_box a.log{
   background:#3b7ddb;
