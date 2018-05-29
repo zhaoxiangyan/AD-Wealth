@@ -22,6 +22,11 @@ export default new Router({
       component: resolve => require(['../components/Login.vue'], resolve)
     },
     {
+      path: '/invest-now',
+      name: 'invest-now',
+      component: resolve => require(['../components/invest-now.vue'], resolve)
+    },
+    {
       path: '/register',
       name: 'register',
       component: resolve => require(['../components/Register.vue'], resolve)
