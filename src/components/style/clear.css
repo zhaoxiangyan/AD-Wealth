@@ -1,0 +1,9 @@
+/* 垂直居中modal对话框 */
+.vertical-center-modal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.vertical-center-modal .ivu-modal{
+    top:0px;
+}

@@ -24,4 +24,6 @@ body{
   margin:0;
   padding:0;
 }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+/* .clearfix{*+height:1%;} */
 </style>

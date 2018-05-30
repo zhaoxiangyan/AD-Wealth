@@ -17,9 +17,9 @@ export default new Router({
       component: resolve => require(['../components/index.vue'], resolve)
     },
     {
-      path: '/login',
-      name: 'login',
-      component: resolve => require(['../components/Login.vue'], resolve)
+      path: '/log-in',
+      name: 'log-in',
+      component: resolve => require(['../components/log-in.vue'], resolve)
     },
     {
       path: '/invest-now',

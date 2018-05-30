@@ -7,6 +7,7 @@ import iView from 'iview'
 import locale from 'iview/dist/locale/en-US'
 import 'iview/dist/styles/iview.css'
 import 'animate.css/animate.css'
+import '../src/components/style/clear.css' //  样式重置
 
 Vue.use(iView, {locale})
 Vue.config.productionTip = false

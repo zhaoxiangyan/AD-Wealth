@@ -17,7 +17,7 @@
                     <transition enter-active-class="animated fadeInRightBig" leave-active-class="animated fadeOutLeftBig"><h3 v-show="title" v-text="text1"></h3></transition>
                     <transition enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutRightBig"><p v-show="text" v-text="text2"></p></transition>
                     <div class="button_box" :class="first?'first':''">
-                        <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDownBig"><router-link to="/login" v-show="btn" class="log" href="javascript:void(0)">LOG IN</router-link></transition>
+                        <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDownBig"><router-link to="/log-in" v-show="btn" class="log" href="javascript:void(0)">LOG IN</router-link></transition>
                         <transition enter-active-class="animated fadeInUp" leave-active-class="animated fadeOutDownBig"><router-link to="/invest-now" v-show="btn" class="now" href="javascript:void(0)">INVEST NOW</router-link></transition>
                     </div>
                   </div>
