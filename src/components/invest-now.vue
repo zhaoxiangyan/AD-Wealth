@@ -96,8 +96,8 @@
                             <td>Total</td>
                             <td colspan="2">
                                 <div class="slide_td">
-                                    <div>USD&nbsp;<input><span></span></div>
-                                    <div>USD&nbsp;<input><span></span></div>
+                                    <div>USD&nbsp;<input type="text" readonly><span></span></div>
+                                    <div>USD&nbsp;<input type="text" readonly><span></span></div>
                                 </div>
                             </td>
                         </tr>
@@ -190,7 +190,7 @@
                 <table class="table_tax1">
                     <thead>
                         <tr>
-                            <th colspan="2">Dividend and Interest Withholding Tax*
+                            <th colspan="2">Dividend and Interest Withholding Tax<em class="red">*</em>
                                 <Tooltip placement="right-start" transfer>
                                    <span class="info"></span>
                                    <div slot="content" style="white-space:normal;">Depending on where you are resident for tax purposes, you may be required to pay Dividend Withholding Tax (DWT) and/or Interest Withholding Tax (IWT).</div>
@@ -937,11 +937,11 @@
                     <tbody>
                         <tr>
                             <td>Allan Gray Equity Fund</td>
-                            <td align="right">USD 50000</td>
+                            <td align="right">USD {{total|filterFun}}</td>
                         </tr>
                         <tr>
                             <td>Total investment amount</td>
-                            <td align="right">USD 50000</td>
+                            <td align="right">USD {{total|filterFun}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -959,20 +959,32 @@
                             <td>Andy</td>
                         </tr>
                         <tr>
-                            <td>Title:</td>
-                            <td>Mr</td>
+                            <td>Surname:</td>
+                            <td>zhao</td>
                         </tr>
                         <tr>
-                            <td>First name:</td>
-                            <td>Andy</td>
+                            <td>Identification/Passport Number:</td>
+                            <td>151798</td>
                         </tr>
                         <tr>
-                            <td>Title:</td>
-                            <td>Mr</td>
+                            <td>Date of birth:</td>
+                            <td>1993-11-11</td>
                         </tr>
                         <tr>
-                            <td>First name:</td>
-                            <td>Andy</td>
+                            <td>Nationality:</td>
+                            <td>China</td>
+                        </tr>
+                        <tr>
+                            <td>Email address:</td>
+                            <td>987670364@qq.com</td>
+                        </tr>
+                        <tr>
+                            <td>Mobile phone number:</td>
+                            <td>151798204</td>
+                        </tr>
+                        <tr>
+                            <td>Residential address:</td>
+                            <td>guangdong shenzhen</td>
                         </tr>
                     </tbody>
                 </table>
@@ -998,7 +1010,7 @@ export default {
     return {
       tabNum: 0,
       checkbox1:false,
-      checkbox2:true,
+      checkbox2:false,
       checkbox3:false,
       modal1:false,
       modal2:false,
@@ -1016,11 +1028,26 @@ export default {
         { text: '', value: '0' },
         { text: 'Cheque deposit', value: '1' },
         { text: 'Bank Telegraphic Transfer', value: '2' }
-      ]
+      ],
+      total:50000
     }
   },
   mounted () {
     document.title = 'AD Wealth | Invest now'
+  },
+  filters: {
+        filterFun: function(value){
+            var s =  Math.round(value).toFixed(2);
+            if(/[^0-9\.]/.test(s)) return "invalid value";
+            s=s.replace(/^(\d*)$/,"$1.");
+            s=(s+"00").replace(/(\d*\.\d\d)\d*/,"$1");
+            s=s.replace(".",",");
+            var re=/(\d)(\d{3},)/;
+            while(re.test(s))
+                    s=s.replace(re,"$1,$2");
+            s=s.replace(/,(\d\d)$/,".$1");
+            return s.replace(/^\./,"0.")
+        }
   },
   methods: {
       tab(index){
@@ -1147,6 +1174,9 @@ export default {
 }
 .button_div button.next_btn:not(.disabled):active{
     background-position:-190px 0;
+}
+.content_0{
+    padding-top:180px;
 }
 .content_0 p{
     border-top: solid 1px #ccc;
@@ -1329,6 +1359,10 @@ export default {
 .content>p.red_star:before{
     content:'*';
     display:inline-block;
+    color:red;
+}
+em.red{
+    font-style:normal;
     color:red;
 }
 </style>
