@@ -4,23 +4,23 @@
         <h2 v-show="tabNum == 0">Welcome to Invest Now</h2>
         <p v-show="tabNum == 0">Follow the four steps below to invest with us.</p>
         <ul class="steps">
-            <li>
+            <li :class="tabNum == 1?'active':''">
                 <div class="number_arrow_div">
-                    <span :class="tabNum == 1?'active':''">1</span>
+                    <span>1</span>
                     <div class="arrow_div"></div>
                 </div>
                 <div class="text">Choose your unit trust(s)</div>
             </li>
-            <li>
+            <li :class="tabNum >= 2&& tabNum < 5?'active':''">
                 <div class="number_arrow_div">
-                    <span :class="tabNum >= 2&& tabNum < 5?'active':''">2</span>
+                    <span>2</span>
                     <div class="arrow_div"></div>
                 </div>
                 <div class="text">Fill in your details</div>
             </li>
-            <li>
+            <li :class="tabNum >= 5?'active':''">
                 <div class="number_arrow_div">
-                    <span :class="tabNum >= 5?'active':''">3</span>
+                    <span>3</span>
                     <div class="arrow_div"></div>
                 </div>
                 <div class="text">Submit your investment</div>
@@ -793,7 +793,7 @@
                                 <select>
                                     <option value=""></option>
                                     <option value="Not registered">I have never registered with my tax authority</option>
-                                    <option value="Not specified">I do not know this, but will take steps to submit this to Allan Gray</option>
+                                    <option value="Not specified">I do not know this, but will take steps to submit this to AD Wealth</option>
                                     <option>Jurisdiction does not issue TINs</option>
                                     <option>Unable to obtain a TIN</option>                            
                                     <option>TIN disclosure not required</option>
@@ -936,7 +936,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Allan Gray Equity Fund</td>
+                            <td>Equity Fund</td>
                             <td align="right">USD {{total|filterFun}}</td>
                         </tr>
                         <tr>
@@ -1109,7 +1109,7 @@ export default {
     border: 2px solid;
     border-color: inherit;
 }
-.number_arrow_div span.active{
+li.active .number_arrow_div span{
     background:#c3344a;
     color:#fff;
 }
@@ -1143,6 +1143,9 @@ export default {
     margin-top:10px;
     font-size:17px;
     padding:0px 30px;
+}
+.steps li.active div.text{
+    color:#c3344a;
 }
 /* 内容块 */
 .content .button_div{
