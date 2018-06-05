@@ -8,8 +8,8 @@
                </Col>
                <Col :span="14">
                   <p><b>Register for an online account</b></p>
-                  <p>Allan Gray Online lets you view and manage your investments securely</p>
-                  <p>If you do not already have an Allan Gray Online account complete the online registration form and a Client Service Centre consultant will then contact you to confirm your registration telephonically.</p>
+                  <p>AD Wealth Online lets you view and manage your investments securely</p>
+                  <p>If you do not already have an AD Wealth Online account, complete the online registration form.</p>
                   <p><b>First time investors </b></p>
                   <p>You can follow the Invest Now process to explore our funds and products and take the first step towards investing with us.</p>
                </Col>
@@ -30,7 +30,7 @@
                       <a href="javascript:void(0)">Forgotten user name or password?</a>
                       <div class="clearfix"></div>
                   </div>
-                  <p>By signing in to Allan Gray Online you are confirming that you have read and understood our terms and conditions.</p>
+                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <a href="javascript:void(0)">terms and conditions.</a></p>
                </Col>
            </Row>
        </div>
