@@ -1,5 +1,11 @@
 <template>
   <div class="login-in">
+     <div class="header clearfix">
+        <div>
+            <h2>AD Wealth</h2>
+            <router-link to="/invest-now" class="invest">INVEST NOW</router-link>
+        </div>
+     </div>
      <div class="row_1">
        <div class="login_row">
            <Row :gutter="30">
@@ -8,10 +14,10 @@
                </Col>
                <Col :span="14">
                   <p><b>Register for an online account</b></p>
-                  <p>AD Wealth Online lets you view and manage your investments securely</p>
+                  <p>AD Wealth Online lets you view and manage your investments securely.</p>
                   <p>If you do not already have an AD Wealth Online account, complete the online registration form.</p>
                   <p><b>First time investors </b></p>
-                  <p>You can follow the Invest Now process to explore our funds and products and take the first step towards investing with us.</p>
+                  <p>You can follow the <router-link to="invest-now">Invest Now</router-link> process to explore our funds and products and take the first step towards investing with us.</p>
                </Col>
                <Col :span="10">
                   <div class="login_box">
@@ -30,11 +36,12 @@
                       <a href="javascript:void(0)">Forgotten user name or password?</a>
                       <div class="clearfix"></div>
                   </div>
-                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <a href="javascript:void(0)">terms and conditions.</a></p>
+                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <a href="javascript:void(0)">Terms and Conditions.</a></p>
                </Col>
            </Row>
        </div>
      </div>
+     <div class="footer"><p>© Copyright 2018 AD Wealth Inc. All rights reserved.</p></div>
   </div>
 </template>
 
@@ -55,13 +62,14 @@ export default {
 <style scoped>
 .row_1{
     max-width:1180px;
+    min-height:800px;
     margin:0 auto;
 }
 .login_row{
-    border-top: 3px solid #c53146;
+    /* border-top: 3px solid #c53146; */
     padding: 115px 60px 50px;
-    margin: 85px 0px 110px;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);
+    /* margin: 85px 0px 110px; */
+    /* box-shadow: 0 0 5px 0 rgba(0,0,0,0.3); */
 }
 .login_row .ivu-col{
   text-align:left;
@@ -120,15 +128,17 @@ export default {
   font-weight: 400;
   padding: 10px 20px;
   color: #fff;
-  background-color: #c53146;
+  /* background-color: #c53146; */
   border-color: rgba(187,36,42,0.64);
+  background:#2d8cf0;
   border: 1px solid transparent;
   cursor:pointer;
 }
 .login_box button:hover{
   color: #fff;
-  background-color: #9c2737;
-  border-color: rgba(136,26,30,0.64);
+  /* background-color: #9c2737; */
+  background:#0d7df3;
+  /* border-color: rgba(136,26,30,0.64); */
 }
 .login_box button .ivu-icon{
   margin-right:0px;
@@ -136,8 +146,51 @@ export default {
 }
 .login_box a{
   float:right;
-  color: #c53146;
+  /* color: #c53146; */
+  color:#2d8cf0;
   font-size:14px;
   margin-top:20px;
+}
+
+/* 头部，底部 */
+.header{
+    background: #3b7ddb;
+}
+.header div{
+    max-width:1000px;
+    margin:0 auto;
+}
+.header h2{
+    float:left;
+    width:100%;
+    margin-right:-300px;
+    line-height:95px;
+    text-align:left;
+    font-size:45px;
+    color:#fff;
+    font-weight:normal;
+}
+.header a{
+    padding:0px 20px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: #fff;
+    border: 2px solid #fff;
+    font-weight: bold;
+    letter-spacing: 1px;
+    border-radius: 2px;
+    background:#b49401;
+    float:right;
+    margin-top:27px;
+}
+.footer{
+    background:rgb(26,38,50);
+}
+.footer p{
+    font-size:20px;
+    color:#fff;
+    line-height:30px;
+    padding:15px 0px;
 }
 </style>

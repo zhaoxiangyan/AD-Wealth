@@ -1,4 +1,4 @@
-/* 垂直居中modal对话框 */
+/* invest-now.vue 垂直居中modal对话框 */
 .vertical-center-modal{
     display: flex;
     align-items: center;
@@ -6,4 +6,9 @@
 }
 .vertical-center-modal .ivu-modal{
     top:0px;
+}
+/* 时间选择器 */
+.birth_div .ivu-input-small{
+   border-radius:0px;
+   border-color:#a9a9a9;
 }

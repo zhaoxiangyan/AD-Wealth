@@ -130,7 +130,7 @@
                            <tr>
                                <td class="red_star">Title</td>
                                <td>
-                                   <select>
+                                   <select v-model="title">
                                        <option value=""></option>
                                        <option value="Ms.">Ms.</option>
                                        <option value="Mr.">Mr.</option>
@@ -140,20 +140,20 @@
                            </tr>
                            <tr>
                                <td class="red_star">First Name</td>
-                               <td><input></td>
+                               <td><input type="text" v-model="firstname"></td>
                            </tr>
                            <tr>
                                <td class="red_star">Surname</td>
-                               <td><input></td>
+                               <td><input type="text" v-model="surname"></td>
                            </tr>
                            <tr>
                                <td class="red_star">Identification/Passport Number</td>
-                               <td><input></td>
+                               <td><input type="text" v-model="passport"></td>
                            </tr>
                            <tr>
-                               <td class="red_star">Date of birth<em>(MM/DD/YYYY)</em></td>
-                               <!-- <td><DatePicker size="small" type="date" placeholder="Select date" style="width: 200px"></DatePicker></td> -->
-                               <td class="birth_td"><div><input> / <input> / <input></div></td>
+                               <td class="red_star">Date of birth<em>(YYYY-MM-DD)</em></td>
+                               <!-- <td class="birth_td"><div><input> / <input> / <input></div></td> -->
+                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" v-model="birth" @on-change="birth=$event"  placeholder="Select date" style="width: 150px"></DatePicker></div></td>
                            </tr>
                        </tbody>
                    </table>
@@ -164,7 +164,7 @@
                            <tr>
                                <td class="red_star">Nationality</td>
                                <td>
-                                   <select>
+                                   <select v-model="nation">
                                         <option value=""></option>
                                         <option value="AFGHANISTAN">AFGHANISTAN</option>
                                         <option value="ÅLAND ISLANDS">ÅLAND ISLANDS</option>
@@ -421,15 +421,22 @@
                            </tr>
                            <tr>
                                <td class="red_star">Email address</td>
-                               <td><input></td>
+                               <td><input type="text" v-model="email"></td>
                            </tr>
                            <tr>
                                <td class="red_star">Mobile phone number</td>
-                               <td><input></td>
+                               <td>
+                                   <select>
+                                       <option value=""></option>
+                                       <option value="1">code1</option>
+                                       <option value="2">code2</option>
+                                   </select>
+                                   <input type="text" v-model="mobile">
+                               </td>
                            </tr>
                            <tr>
                                <td class="red_star">Residential address</td>
-                               <td><textarea></textarea></td>
+                               <td><textarea v-model="address"></textarea></td>
                            </tr>
                        </tbody>
                    </table>
@@ -438,7 +445,7 @@
             <p class="red_star">Compulsory information</p>
             <div class="button_div">
                 <button @click="back" class="back_btn"></button>
-                <button @click="next" class="next_btn" :class="tabNum == 2?'':'disabled'" :disabled="tabNum !== 2"></button>
+                <button @click="next" class="next_btn" :class="tabNum == 2&&investor_next?'':'disabled'" :disabled="!(tabNum == 2&&investor_next)"></button>
             </div>
         </div>
         <div class="content_3 content" v-show="tabNum == 3">
@@ -470,7 +477,7 @@
                                 <!-- <a class="error" title="You may qualify for a reduced rate if there is a Double Taxation Agreement (DTA) in place between South Africa and your country of residence. Distributions from a Real Estate Investment Trust (REIT) are exempt from South African income tax, but are subject to DWT at the rate applicable to the investor." >&nbsp;</a> -->
                             </td>
                             <td>
-                                <select>
+                                <select v-model="residence">
                                     <option value=""></option>
                                     <option value="AFGHANISTAN">AFGHANISTAN</option>
                                     <option value="ÅLAND ISLANDS">ÅLAND ISLANDS</option>
@@ -750,8 +757,8 @@
                         <td>
                             <select v-model="tax_number_reason" @change.once="tax_number_error = true">
                                 <option value=""></option>
-                                <option value="Not registered">I have never registered with my tax authority</option>
-                                <option value="Not specified">I do not know this, but will take steps to submit to AD Wealth</option>
+                                <option value="I have never registered with my tax authority">I have never registered with my tax authority</option>
+                                <option value="I do not know this, but will take steps to submit to AD Wealth">I do not know this, but will take steps to submit to AD Wealth</option>
                                 <option value="Jurisdiction does not issue TINs">Jurisdiction does not issue TINs</option>
                                 <option value="Unable to obtain a TIN">Unable to obtain a TIN</option>
                                 <option value="TIN disclosure not required">TIN disclosure not required</option>
@@ -1044,14 +1051,14 @@
                         <tr>
                             <td>Tax identification number</td>
                             <td>
-                                <input type="text" v-model="item.text">
+                                <input type="text" v-model="item.text" @blur.once="item.error = true"><span class="error" :style="{'visibility':item.error&&item_result(index)?'visible':'hidden'}"></span>
                                 <!-- <a class="error" title="Please enter a valid tax identification number, or indicate a reason for not providing a tax identification number">&nbsp;</a> -->
                             </td>
                         </tr>
                         <tr>
                             <td>Reason</td>
                             <td>
-                                <select v-model="item.select2">
+                                <select v-model="item.select2" @change.once="item.error = true">
                                     <option value=""></option>
                                     <option value="Not registered">I have never registered with my tax authority</option>
                                     <option value="Not specified">I do not know this, but will take steps to submit this to AD Wealth</option>
@@ -1122,10 +1129,10 @@
                             </td>
                         </tr>
                         <tr>
-                            <td><span><input v-model="radio6" value="1" type="radio"><label>Your salary or bonus</label><input v-model="radio6" value="2" type="radio"><label>An existing AD Wealth investment</label><input v-model="radio6" value="3" type="radio"><label>Inheritance</label><input v-model="radio6" value="4" type="radio"><label> Savings in a bank account</label><input v-model="radio6" value="0" type="radio"><label>Other</label></span></td>
+                            <td><span><input v-model="radio6" value="Your salary or bonus" type="radio"><label>Your salary or bonus</label><input v-model="radio6" value="An existing AD Wealth investment" type="radio"><label>An existing AD Wealth investment</label><input v-model="radio6" value="Inheritance" type="radio"><label>Inheritance</label><input v-model="radio6" value="Savings in a bank account" type="radio"><label>Savings in a bank account</label><input v-model="radio6" value="0" type="radio"><label>Other</label></span></td>
                         </tr>
                         <tr v-show="radio6 == '0'">
-                            <td>Specify&nbsp;<input type="text"></td>
+                            <td>Specify&nbsp;<input type="text" v-model="other_text"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1142,11 +1149,13 @@
                             <td>How do you want to invest?</td>
                             <td>
                                 <select v-model="select1">
-                                    <option v-for="option in options1" v-bind:value="option.value" >{{ option.text }}</option>
+                                    <option value=""></option>
+                                    <option value="Cheque deposit">Cheque deposit</option>
+                                    <option value="Bank Telegraphic Transfer">Bank Telegraphic Transfer</option>
                                 </select>
                             </td>
                         </tr>
-                        <tr v-show="select1 !== '0'">
+                        <tr v-show="select1 !== ''">
                             <td colspan="2"><div class="notice"><b>We need proof that you have made the deposit into our bank account </b><br/>Our bank details will be displayed on the confirmation screen. Please make the deposit once you have completed your details. We will finalize your investment after receiving your funds into our bank account. </div></td>
                         </tr>
                     </tbody>
@@ -1180,7 +1189,7 @@
         </div>
         <div class="content_7 content" v-show="tabNum == 7">
             <p><b>AD Wealth</b></p>
-            <div class="clearfix"><h3>Summary - Ref.No.15179822</h3><button class="print_btn" @click="print"></button></div>
+            <div class="clearfix"><h3>Summary - Ref.No.{{reference_number}}</h3><button class="print_btn" @click="print"></button></div>
         </div>
         <div class="content_5 content" v-show="tabNum == 5||tabNum == 7">
             <div class="introduction" v-show="tabNum == 5">
@@ -1197,17 +1206,30 @@
                     <thead>
                         <tr>
                             <th>Fund</th>
-                            <th align="right">Lump sum contribution</th>
+                            <th align="right" v-show="total_fund1>0">Lump sum contribution</th>
+                            <th align="right" v-show="total_fund2>0">Monthly contribution</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <tr v-show="checkbox1">
                             <td>Equity Fund</td>
-                            <td align="right">USD {{total|filterFun}}</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0">USD {{equity1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0">USD {{equity2|filterFun}}</td>
+                        </tr>
+                        <tr v-show="checkbox2">
+                            <td>Balanced Fund</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0">USD {{balanced1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0">USD {{balanced2|filterFun}}</td>
+                        </tr>
+                        <tr v-show="checkbox3">
+                            <td>Stable Fund</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0">USD {{stable1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0">USD {{stable2|filterFun}}</td>
                         </tr>
                         <tr>
                             <td>Total investment amount</td>
-                            <td align="right">USD {{total|filterFun}}</td>
+                            <td align="right" v-show="total_fund1>0">USD {{total_fund1|filterFun}}</td>
+                            <td align="right" v-show="total_fund2>0">USD {{total_fund2|filterFun}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1218,39 +1240,39 @@
                     <tbody>
                         <tr>
                             <td>Title:</td>
-                            <td>Mr</td>
+                            <td>{{title}}</td>
                         </tr>
                         <tr>
                             <td>First name:</td>
-                            <td>Andy</td>
+                            <td>{{firstname}}</td>
                         </tr>
                         <tr>
                             <td>Surname:</td>
-                            <td>zhao</td>
+                            <td>{{surname}}</td>
                         </tr>
                         <tr>
                             <td>Identification/Passport Number:</td>
-                            <td>151798</td>
+                            <td>{{passport}}</td>
                         </tr>
                         <tr>
                             <td>Date of birth:</td>
-                            <td>1993-11-11</td>
+                            <td>{{birth}}</td>
                         </tr>
                         <tr>
                             <td>Nationality:</td>
-                            <td>China</td>
+                            <td>{{nation}}</td>
                         </tr>
                         <tr>
                             <td>Email address:</td>
-                            <td>987670364@qq.com</td>
+                            <td>{{email}}</td>
                         </tr>
                         <tr>
                             <td>Mobile phone number:</td>
-                            <td>151798204</td>
+                            <td>{{mobile}}</td>
                         </tr>
                         <tr>
                             <td>Residential address:</td>
-                            <td>guangdong shenzhen</td>
+                            <td>{{address}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1265,44 +1287,88 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td colspan="2">The investor is not registered in South Africa for fax purposes.</td>
+                            <td colspan="2" v-if="radio2 == 'yes'">The investor is registered in Belize for fax purposes.</td>
+                            <td colspan="2" v-else>The investor is not registered in Belize for fax purposes.</td>
                         </tr>
-                        <tr>
+                        <tr v-show="radio2 == 'no'">
                             <td>Country of residence for tax purposes:</td>
-                            <td>ARGENTINA</td>
+                            <td>{{residence}}</td>
                         </tr>
                         <tr>
                             <td>Tax identification number:</td>
-                            <td>I have never registered with my tax authority</td>
+                            <td v-if="tax_number_reason !== ''">{{tax_number_reason}}</td>
+                            <td v-else>{{tax_number}}</td>
                         </tr>
-                        <tr>
+                        <tr v-if="radio3 == 'no'">
+                            <td colspan="2">I don't have any additional tax information?</td>
+                        </tr>
+                        <template v-else v-for="(item, index) in templateDate">
+                            <tr>
+                                <td>Country</td>
+                                <td>{{item.select1}}</td>
+                            </tr>
+                            <tr>
+                                <td>Tax identification number</td>
+                                <td>{{item.text}}</td>
+                            </tr>
+                            <tr>
+                                <td>Reason</td>
+                                <td>{{item.select2}}</td>
+                            </tr>
+                        </template>
+                        <tr v-show="radio4 == 'no'">
                             <td colspan="2">The investor is not a Specified U.S.Person.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <h3>Investment Details</h3>
-            <div class="table_div">
+            <h3 v-show="radio4 == 'yes'">United States Tax Liability Declaration</h3>
+            <div class="table_div" v-show="radio4 == 'yes'">
                 <table>
                     <tbody>
                         <tr>
-                            <td>Source of funds:</td>
-                            <td>Your salary or bonus</td>
-                        </tr>
-                        <tr>
-                            <td>Method of payment:</td>
-                            <td>Cheque deposit</td>
+                            <td v-if="radio5 == 'yes'">I am liable to declare my income and assets to the US IRS.</td>
+                            <td v-else>I am not liable to declare my income and assets to the US IRS.</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <h3>Distribution Details</h3>
-            <div class="table_div">
+            <h3 v-show="radio6 !== ''&&select1 !==''">Investment Details</h3>
+            <div class="table_div" v-show="radio6 !== ''&&select1 !==''">
+                <table>
+                    <tbody>
+                        <tr v-show="radio6 !== ''">
+                            <td>Source of funds:</td>
+                            <td v-if="radio6 == '0'">Other:{{other_text}}</td>
+                            <td v-else>{{radio6}}</td>
+                        </tr>
+                        <tr v-show="select1 !== ''">
+                            <td>Method of payment:</td>
+                            <td>{{select1}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 v-show="radio7 !== ''">Distribution Details</h3>
+            <div class="table_div" v-show="radio7 !== ''">
                 <table>
                     <tbody>
                         <tr>
                             <td>Distributions:</td>
-                            <td>Reinvested</td>
+                            <td v-if="radio7 == '1'">Reinvested</td>
+                            <td v-else>Paid directly into bank account</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 v-show="radio8 !== ''">Financial Adviser Details</h3>
+            <div class="table_div" v-show="radio8 !== ''">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Financial Adviser:</td>
+                            <td v-if="radio8 == 'yes'">Yes</td>
+                            <td v-else>No</td>
                         </tr>
                     </tbody>
                 </table>
@@ -1311,10 +1377,9 @@
                 <b>Please read the documents below.</b>
                 <li><input type="checkbox" v-model="read1">I have read and understood the relevant fund factsheet (minimum disclosure document) of the unit trusts I wish to invest.</li>
                 <li><input type="checkbox" v-model="read2">I have read and understood the AD Wealth Unit Trust Investment Overview, which set out the fees, fund selection and an explanation of how the product works. I will need this information to complete my confirmation instruction.</li>
-                <li><input type="checkbox" v-model="read3">I have read, understood and agree to the Terms and Conditions that apply to this investment.</li>
-                <li><input type="checkbox" v-model="read4">I have read, understood and agree to the Terms and Conditions that govern the use of the AD Wealth website. </li>
-                <li><input type="checkbox" v-model="read5">All parties associated with this investment have read, understood and agree to the FATCA/CRS Terms and Conditions that relate to AD Wealth’s tax reporting obligations.</li>
-                <li><input type="checkbox" v-model="read6">I declare that I am not a Belize resident.</li>
+                <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <a href="javascript:void(0)">Terms and Conditions</a> that apply to this investment.</li>
+                <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <a href="javascript:void(0)">Terms and Conditions</a> that govern the use of the AD Wealth website. </li>
+                <li><input type="checkbox" v-model="read5">All parties associated with this investment have read, understood and agree to the FATCA/CRS <a href="javascript:void(0)">Terms and Conditions</a> that relate to AD Wealth’s tax reporting obligations.</li>
             </ul>
             <div class="button_div" v-show="tabNum == 5">
                 <button @click="back" class="back_btn"></button>
@@ -1322,7 +1387,7 @@
             </div>
         </div>
         <div class="content_6 content" v-show="tabNum == 6||tabNum == 7">
-            <p v-show="tabNum == 6">Thank you for submitting your investment online. Your reference number is 15179822.</p>
+            <p v-show="tabNum == 6">Thank you for submitting your investment online. Your reference number is {{reference_number}}.</p>
             <p v-show="tabNum == 6">Your supporting documents have been emailed to you. We will process your investment once we have received a signed copy of these documents.</p>
             <button class="print_btn" @click="next" v-show="tabNum == 6"></button>
             <p style="margin-top:45px;">Cheque / Electronic Transfers and internet transfers should be made in favor of the bank account below, also see the correct reference number to use for the Administrator to identify your money. Please email the proof of deposit and supporting documents to cs@ad-wealth.com.</p>
@@ -1372,7 +1437,8 @@ export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:7,
+      tabNum:3,
+      //   1
       checkbox1:false,
       checkbox2:false,
       checkbox3:false,
@@ -1388,37 +1454,43 @@ export default {
       modal1:false,
       modal2:false,
       modal3:false,
-
+      // 2 
       radio1:'investor',
+      title:'',
+      firstname:'',
+      surname:'',
+      passport:'',
+      birth:'',
+      nation:'',
+      email:'',
+      mobile:'',
+      address:'',
+      //   3
       radio2:'',
-      radio3:'',
-      radio4:'',
-      radio5:'',
-      radio6:'',
-      radio7:'',
-      radio8:'',
-      select1:'0',
-      options1:[
-        { text: '', value: '0' },
-        { text: 'Cheque deposit', value: '1' },
-        { text: 'Bank Telegraphic Transfer', value: '2' }
-      ],
-
-      total:50000,
+      residence:'',
       tax_number:'',
       tax_number_error:false,
       tax_number_reason:'',
+      radio3:'',
       templateNumber:1,
-      templateDate:[
-          {select1:'',text:'',select2:''}
-      ],
-    //   5
+      templateDate:[{select1:'',text:'',select2:'',error:false}],
+      radio4:'',
+      radio5:'',
+      //   4
+      radio6:'',
+      other_text:'',
+      select1:'',
+      radio7:'',
+      radio8:'',
+      //   5
+      total:50000,
       read1:false,
       read2:false,
       read3:false,
       read4:false,
       read5:false,
-      read6:false
+      //   6,7
+      reference_number:'1517982'
     }
   },
   mounted () {
@@ -1429,10 +1501,17 @@ export default {
           return this.checkbox1||this.checkbox2||this.checkbox3;
       },
       total_fund1:function(){
-          return (this.checkbox1?this.equity1:0)+(this.checkbox2?this.balanced1:0)+(this.checkbox3?this.stable1:0);
+          return (this.checkbox1?(this.equity1 == ''?0:this.equity1):0)+(this.checkbox2?(this.balanced1 == ''?0:this.balanced1):0)+(this.checkbox3?(this.stable1 == ''?0:this.stable1):0);
       },
       total_fund2:function(){
-          return (this.checkbox1?this.equity2:0)+(this.checkbox2?this.balanced2:0)+(this.checkbox3?this.stable2:0);
+          return (this.checkbox1?(this.equity2 == ''?0:this.equity2):0)+(this.checkbox2?(this.balanced2 == ''?0:this.balanced2):0)+(this.checkbox3?(this.stable2 == ''?0:this.stable2):0);
+      },
+      investor_next:function(){
+          if(this.title == ''||this.firstname == ''||this.surname == ''||this.passport == ''||this.birth == ''||this.nation == ''||this.email == ''||this.mobile == ''||this.address == ''){
+              return false;
+          }else{
+              return true;
+          }
       },
       tax_number_result:function(){
         if(this.tax_number == ''&&this.tax_number_reason == ''){
@@ -1442,7 +1521,7 @@ export default {
         }
       },
       read_submit:function(){
-          if(this.read1&&this.read2&&this.read3&&this.read4&&this.read5&&this.read6){
+          if(this.read1&&this.read2&&this.read3&&this.read4&&this.read5){
               return true;
           }else{
               return false;
@@ -1496,6 +1575,12 @@ export default {
               self.tax_number_error = true;
               return false;
           }
+          for(let i=0;i<self.templateDate.length;i++){
+              if(self.templateDate[i].text == ''&&self.templateDate[i].select2 ==''){
+                  self.templateDate[i].error = true;
+                  return false;
+              }
+          }
           self.next();
       },
       print(){
@@ -1510,7 +1595,8 @@ export default {
           this.templateDate.push({
               select1:'',
               text:'',
-              select2:''
+              select2:'',
+              error:false
           })
       },
       removeMore() {
@@ -1524,6 +1610,13 @@ export default {
         // }
         this.templateDate.pop();
       },
+      item_result(index){
+          if(this.templateDate[index].text == ''&&this.templateDate[index].select2 == ''){
+              return true;
+          }else{
+              return false;
+          }
+      }
   }
 }
 </script>
@@ -1893,9 +1986,9 @@ button.print_btn{
     font-weight:normal;
 }
 .header a{
-    width: 150px;
-    height: 50px;
-    line-height: 50px;
+    padding:0 20px;
+    height: 40px;
+    line-height: 40px;
     font-size: 16px;
     color: #fff;
     border: 2px solid #fff;
@@ -1904,7 +1997,7 @@ button.print_btn{
     border-radius: 2px;
     background: #3b7ddb;
     float:right;
-    margin-top:22px;
+    margin-top:27px;
 }
 .footer{
     background:rgb(26,38,50);
