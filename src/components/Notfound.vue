@@ -1,7 +1,7 @@
 <template>
  <div class="notfound">
     <p class="sorry_box"><span class="sorry">抱歉</span>，您所访问的页面不存在...</p>
-    <p class="timeout"><span class="countdown">{{time}}</span>秒后自动跳转到<a href="/">图灵智能交易系统</a></p>
+    <p class="timeout"><span class="countdown">{{time}}</span>秒后自动跳转到<a href="/">AD Wealth</a></p>
  </div>
 </template>
 <script>

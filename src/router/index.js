@@ -26,6 +26,27 @@ export default new Router({
       name: 'invest-now',
       component: resolve => require(['../components/invest-now.vue'], resolve)
     },
+    // 文档
+    {
+      path: '/AD-Wealth-Online-T&C-180605',
+      name: 'ad-wealth-online',
+      component: resolve => require(['../components/document/ad-wealth-online.vue'], resolve)
+    },
+    {
+      path: '/AD-Wealth-Unit-Trust-T&C-180607',
+      name: 'ad-wealth-unit-trust',
+      component: resolve => require(['../components/document/ad-wealth-unit-trust.vue'], resolve)
+    },
+    {
+      path: '/Client-Complaint-Process-180605',
+      name: 'client-complaint-process',
+      component: resolve => require(['../components/document/client-complaint-process.vue'], resolve)
+    },
+    {
+      path: '/Privacy-and-security-policy-180607',
+      name: 'privacy-and-security-policy',
+      component: resolve => require(['../components/document/privacy-and-security-policy.vue'], resolve)
+    },
     {
       path: '/register',
       name: 'register',

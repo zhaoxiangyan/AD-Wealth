@@ -49,7 +49,7 @@
             <div class="introduction">
                 <p>Please select your unit trust(s) below and enter the amounts you would like to invest.<br/>You can choose to invest:</p>
                 <ul>
-                    <li>A minimum monthly amount of USD1,000</li>
+                    <li>A minimum monthly amount of USD2,000</li>
                     <li>A minimum lump sum of USD20,000</li>
                     <li>Both of the above</li>
                 </ul>
@@ -69,9 +69,9 @@
                             <td><Checkbox v-model="checkbox1"></Checkbox></td>
                             <td><a href="javascript:void(0)" @click="modal1 = true">Equity Fund</a></td>
                             <td colspan="2">
-                                <div class="slide_td" :class="equity_error?'error_border':''">
-                                    <div>USD&nbsp;<input v-model.number="equity1" type="number" :readonly="!checkbox1"><span></span></div>
-                                    <div>USD&nbsp;<input v-model.number="equity2" type="number" :readonly="!checkbox1"><span></span></div>
+                                <div class="slide_td clearfix">
+                                    <div>USD&nbsp;<input v-model.number="equity1" type="number" :readonly="!checkbox1"><span :style="{'display':equity1_error?'block':'none'}">Minimum USD20,000</span></div>
+                                    <div>USD&nbsp;<input v-model.number="equity2" type="number" :readonly="!checkbox1"><span :style="{'display':equity2_error?'block':'none'}">Minimum USD20,00</span></div>
                                 </div>
                             </td>
                         </tr>
@@ -79,9 +79,9 @@
                             <td><Checkbox v-model="checkbox2"></Checkbox></td>
                             <td><a href="javascript:void(0)" @click="modal2 = true">Balanced Fund</a></td>
                             <td colspan="2">
-                                <div class="slide_td" :class="balanced_error?'error_border':''">
-                                    <div>USD&nbsp;<input  v-model.number="balanced1" type="number" :readonly="!checkbox2"><span></span></div>
-                                    <div>USD&nbsp;<input  v-model.number="balanced2" type="number" :readonly="!checkbox2"><span></span></div>
+                                <div class="slide_td clearfix">
+                                    <div>USD&nbsp;<input  v-model.number="balanced1" type="number" :readonly="!checkbox2"><span :style="{'display':balanced1_error?'block':'none'}">Minimum USD20,000</span></div>
+                                    <div>USD&nbsp;<input  v-model.number="balanced2" type="number" :readonly="!checkbox2"><span :style="{'display':balanced2_error?'block':'none'}">Minimum USD20,00</span></div>
                                 </div>
                             </td>
                         </tr>
@@ -89,9 +89,9 @@
                             <td><Checkbox v-model="checkbox3"></Checkbox></td>
                             <td><a href="javascript:void(0)" @click="modal3 = true">Stable Fund</a></td>
                             <td colspan="2">
-                                <div class="slide_td" :class="stable_error?'error_border':''">
-                                    <div>USD&nbsp;<input  v-model.number="stable1" type="number" :readonly="!checkbox3"><span></span></div>
-                                    <div>USD&nbsp;<input  v-model.number="stable2" type="number" :readonly="!checkbox3"><span></span></div>
+                                <div class="slide_td clearfix">
+                                    <div>USD&nbsp;<input  v-model.number="stable1" type="number" :readonly="!checkbox3"><span :style="{'display':stable1_error?'block':'none'}">Minimum USD20,000</span></div>
+                                    <div>USD&nbsp;<input  v-model.number="stable2" type="number" :readonly="!checkbox3"><span :style="{'display':stable2_error?'block':'none'}">Minimum USD20,00</span></div>
                                 </div>
                             </td>
                         </tr>
@@ -151,9 +151,9 @@
                                <td><input type="text" v-model="passport"></td>
                            </tr>
                            <tr>
-                               <td class="red_star">Date of birth<em>(YYYY-MM-DD)</em></td>
-                               <!-- <td class="birth_td"><div><input> / <input> / <input></div></td> -->
-                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" v-model="birth" @on-change="birth=$event"  placeholder="Select date" style="width: 150px"></DatePicker></div></td>
+                               <td class="red_star">Date of birth<em>(MM/DD/YYYY)</em></td>
+                               <!-- <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" v-model="birth" @on-change="birth=$event"  placeholder="Select date" style="width: 150px"></DatePicker></div></td> -->
+                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" format="MM/dd/yyyy" v-model="birth" placeholder="Select date" style="width: 150px"></DatePicker></div></td>
                            </tr>
                        </tbody>
                    </table>
@@ -1256,7 +1256,7 @@
                         </tr>
                         <tr>
                             <td>Date of birth:</td>
-                            <td>{{birth}}</td>
+                            <td>{{birth|birthMoment}}</td>
                         </tr>
                         <tr>
                             <td>Nationality:</td>
@@ -1377,8 +1377,8 @@
                 <b>Please read the documents below.</b>
                 <li><input type="checkbox" v-model="read1">I have read and understood the relevant fund factsheet (minimum disclosure document) of the unit trusts I wish to invest.</li>
                 <li><input type="checkbox" v-model="read2">I have read and understood the AD Wealth Unit Trust Investment Overview, which set out the fees, fund selection and an explanation of how the product works. I will need this information to complete my confirmation instruction.</li>
-                <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <a href="javascript:void(0)">Terms and Conditions</a> that apply to this investment.</li>
-                <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <a href="javascript:void(0)">Terms and Conditions</a> that govern the use of the AD Wealth website. </li>
+                <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <router-link to="/AD-Wealth-Unit-Trust-T&C-180607" target="_blank">Terms and Conditions</router-link> that apply to this investment.</li>
+                <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions</router-link> that govern the use of the AD Wealth website. </li>
                 <li><input type="checkbox" v-model="read5">All parties associated with this investment have read, understood and agree to the FATCA/CRS <a href="javascript:void(0)">Terms and Conditions</a> that relate to AD Wealth’s tax reporting obligations.</li>
             </ul>
             <div class="button_div" v-show="tabNum == 5">
@@ -1433,24 +1433,28 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:3,
+      tabNum:5,
       //   1
       checkbox1:false,
       checkbox2:false,
       checkbox3:false,
       equity1:'',
       equity2:'',
-      equity_error:false,
+      equity1_error:false,
+      equity2_error:false,
       balanced1:'',
       balanced2:'',
-      balanced_error:false,
+      balanced1_error:false,
+      balanced2_error:false,
       stable1:'',
       stable2:'',
-      stable_error:false,
+      stable1_error:false,
+      stable2_error:false,
       modal1:false,
       modal2:false,
       modal3:false,
@@ -1540,6 +1544,9 @@ export default {
                     s=s.replace(re,"$1,$2");
             s=s.replace(/,(\d\d)$/,".$1");
             return s.replace(/^\./,"0.")
+        },
+        birthMoment:function(el){
+            return moment(el).format('L');
         }
   },
   methods: {
@@ -1554,17 +1561,30 @@ export default {
       },
       next1(){
           var self = this;
-          self.equity_error = false;
-          self.balanced_error = false;
-          self.stable_error = false;
-          if(self.checkbox1&& (((20000>self.equity1&&self.equity1>0)||(0<self.equity2&&self.equity2<1000))||!(self.equity1>=20000||self.equity2>=1000)) ){
-            self.equity_error = true;
+          self.equity1_error = false;
+          self.equity2_error = false;
+          self.balanced1_error = false;
+          self.balanced2_error = false;
+          self.stable1_error = false;
+          self.stable2_error = false;
+        //   if(self.checkbox1&& ( (20000>self.equity1&&self.equity1>0)||!(self.equity1>=20000) ) ){
+          if(self.checkbox1&& ( !(20000<=self.equity1)&&!((self.equity1 == 0||self.equity1 == '')&&(self.equity2>0)) ) ){
+            self.equity1_error = true;
             return false;
-          }else if(self.checkbox2&& (((20000>self.balanced1&&self.balanced1>0)||(0<self.balanced2&&self.balanced2<1000))||!(self.balanced1>=20000||self.balanced2>=1000)) ){
-            self.balanced_error = true;
+          }else if(self.checkbox1&& ( !(2000<=self.equity2)&&!((self.equity2 == 0||self.equity2 == '')&&(self.equity1>0)) ) ){
+            self.equity2_error = true;
             return false;
-          }else if(self.checkbox3&& (((20000>self.stable1&&self.stable1>0)||(0<self.stable2&&self.stable2<1000))||!(self.stable1>=20000||self.stable2>=1000)) ){
-            self.stable_error = true;
+          }else if(self.checkbox2&& ( !(20000<=self.balanced1)&&!((self.balanced1 == 0||self.balanced1 == '')&&(self.balanced2>0)) ) ){
+            self.balanced1_error = true;
+            return false;
+          }else if(self.checkbox2&& ( !(2000<=self.balanced2)&&!((self.balanced2 == 0||self.balanced2 == '')&&(self.balanced1>0)) ) ){
+            self.balanced2_error = true;
+            return false;
+          }else if(self.checkbox3&& ( !(20000<=self.stable1)&&!((self.stable1 == 0||self.stable1 == '')&&(self.stable2>0)) ) ){
+            self.stable1_error = true;
+            return false;
+          }else if(self.checkbox3&& ( !(2000<=self.stable2)&&!((self.stable2 == 0||self.stable2 == '')&&(self.stable1>0)) ) ){
+            self.stable2_error = true;
             return false;
           }
           self.next();
@@ -1813,7 +1833,7 @@ button.print_btn{
     text-align:left;
 }
 .content_1 .table_div .slide_td{
-    height:38px;
+    /* height:38px; */
     padding-top:8px;
 }
 .content_1 .table_div table tfoot .slide_td{
@@ -1827,11 +1847,15 @@ button.print_btn{
 .content_1 .slide_td div input{
     text-align:right;
 }
-.content_1 .slide_td.error_border div input{
+/* .content_1 .slide_td.error_border div input{
     border-color:red;
-}
+} */
 .content_1 .slide_td:after{
     clear:both;
+}
+.content_1 .slide_td div span{
+    display:block;
+    color:red;
 }
 .content_1>p,.content_2>p,.content_3>p,.content_4>p{
     text-align:left;

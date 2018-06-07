@@ -36,7 +36,7 @@
                       <a href="javascript:void(0)">Forgotten user name or password?</a>
                       <div class="clearfix"></div>
                   </div>
-                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <a href="javascript:void(0)">Terms and Conditions.</a></p>
+                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions.</router-link></p>
                </Col>
            </Row>
        </div>
