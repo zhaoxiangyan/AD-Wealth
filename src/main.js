@@ -8,9 +8,13 @@ import locale from 'iview/dist/locale/en-US'
 import 'iview/dist/styles/iview.css'
 import 'animate.css/animate.css'
 import '../src/components/style/clear.css' //  样式重置
+import axios from 'axios'
 
 Vue.use(iView, {locale})
 Vue.config.productionTip = false
+axios.defaults.withCredentials = true
+// axios.defaults.baseURL = 'https://192.168.0.145'
+Vue.prototype.$http = axios
 
 /* eslint-disable no-new */
 new Vue({

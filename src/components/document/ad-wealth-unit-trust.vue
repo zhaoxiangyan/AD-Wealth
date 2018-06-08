@@ -6,7 +6,7 @@
         </div>
      </div>
      <div class="row_1">
-        <h3>UNIT TRUST TERMS AND CONDITIONS</h3>
+        <h3>Unit Trust Terms and Conditions</h3>
         <p class="title_1">DEFINITIONS</p>
         <p class="content_1">AD Wealth<br/>The company that administers the unit trust(s), AD Wealth Inc. It is authorized to provide financial services. In this document it is referred to as ‘AD Wealth‘.</p>
         <p class="content_1">Unitholder<br/>The person/legal entity, including a trust, who has invested in AD Wealth unit trusts and in whose name the investment is held – addressed as ‘you‘.</p>

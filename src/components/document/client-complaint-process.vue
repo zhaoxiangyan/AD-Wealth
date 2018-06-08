@@ -6,7 +6,7 @@
         </div>
      </div>
      <div class="row_1">
-        <h3>CLIENT COMPLAINT PROCESS</h3>
+        <h3>Client Compliant Process</h3>
         <p class="tips">* Please note that this process applies to AD Wealth Inc. and all its subsidiary companies (“AD Wealth”).</p>
         <p class="content_1">WHAT CAN I COMPLAIN ABOUT TO AD WEALTH?<br/>Any dissatisfaction with a service provided by AD Wealth.</p>
         <p class="content_1">HOW SHOULD I GO ABOUT COMPLAINING TO AD WEALTH?

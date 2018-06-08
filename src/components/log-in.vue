@@ -33,7 +33,7 @@
                       </div>
                       <button>Log in<Icon type="log-in"></Icon></button>
                       <div class="clearfix"></div>
-                      <a href="javascript:void(0)">Forgotten user name or password?</a>
+                      <router-link to="/forgotten-password">Forgotten password?</router-link>
                       <div class="clearfix"></div>
                   </div>
                   <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions.</router-link></p>

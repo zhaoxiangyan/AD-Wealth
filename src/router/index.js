@@ -22,6 +22,11 @@ export default new Router({
       component: resolve => require(['../components/log-in.vue'], resolve)
     },
     {
+      path: '/forgotten-password',
+      name: 'forgotten-password',
+      component: resolve => require(['../components/forgotten-password.vue'], resolve)
+    },
+    {
       path: '/invest-now',
       name: 'invest-now',
       component: resolve => require(['../components/invest-now.vue'], resolve)
@@ -43,7 +48,7 @@ export default new Router({
       component: resolve => require(['../components/document/client-complaint-process.vue'], resolve)
     },
     {
-      path: '/Privacy-and-security-policy-180607',
+      path: '/Privacy-and-Security-Policy-180608',
       name: 'privacy-and-security-policy',
       component: resolve => require(['../components/document/privacy-and-security-policy.vue'], resolve)
     },

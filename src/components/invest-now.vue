@@ -95,6 +95,16 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td><Checkbox v-model="checkbox4"></Checkbox></td>
+                            <td><a href="javascript:void(0)">Money Market Fund</a></td>
+                            <td colspan="2">
+                                <div class="slide_td clearfix">
+                                    <div>USD&nbsp;<input  v-model.number="market1" type="number" :readonly="!checkbox4"><span :style="{'display':market1_error?'block':'none'}">Minimum USD20,000</span></div>
+                                    <div>USD&nbsp;<input  v-model.number="market2" type="number" :readonly="!checkbox4"><span :style="{'display':market2_error?'block':'none'}">Minimum USD20,00</span></div>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>
@@ -124,11 +134,11 @@
             </div>
             <h3>Investor Details</h3>
             <Row>
-                <Col span="12" class="table_div">
+                <Col span="10" class="table_div">
                    <table>
                        <tbody>
                            <tr>
-                               <td class="red_star">Title</td>
+                               <td class="red_star" style="width:52%">Title</td>
                                <td>
                                    <select v-model="title">
                                        <option value=""></option>
@@ -153,16 +163,16 @@
                            <tr>
                                <td class="red_star">Date of birth<em>(MM/DD/YYYY)</em></td>
                                <!-- <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" v-model="birth" @on-change="birth=$event"  placeholder="Select date" style="width: 150px"></DatePicker></div></td> -->
-                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" format="MM/dd/yyyy" v-model="birth" placeholder="Select date" style="width: 150px"></DatePicker></div></td>
+                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" format="MM/dd/yyyy" v-model="birth" placeholder="Select date"></DatePicker></div></td>
                            </tr>
                        </tbody>
                    </table>
                 </Col>
-                <Col span="12" class="table_div">
+                <Col span="14" class="table_div">
                    <table>
                        <tbody>
                            <tr>
-                               <td class="red_star">Nationality</td>
+                               <td class="red_star" style="width:28%">Nationality</td>
                                <td>
                                    <select v-model="nation">
                                         <option value=""></option>
@@ -426,12 +436,10 @@
                            <tr>
                                <td class="red_star">Mobile phone number</td>
                                <td>
-                                   <select>
-                                       <option value=""></option>
-                                       <option value="1">code1</option>
-                                       <option value="2">code2</option>
-                                   </select>
-                                   <input type="text" v-model="mobile">
+                                   <select style="width:60%;border-right:none;" v-model="code">
+                                       <option value="" disabled selected style="color:#fff;">Country Code</option>
+                                       <option v-for="(item,index) in country_code" :key="index" :value="item.value">{{item.option}}</option>
+                                   </select><input type="text" v-model="mobile" style="width:40%;">
                                </td>
                            </tr>
                            <tr>
@@ -1188,8 +1196,8 @@
             </div>
         </div>
         <div class="content_7 content" v-show="tabNum == 7">
-            <p><b>AD Wealth</b></p>
-            <div class="clearfix"><h3>Summary - Ref.No.{{reference_number}}</h3><button class="print_btn" @click="print"></button></div>
+            <h3>AD Wealth</h3>
+            <div class="clearfix"><b>Summary - Ref.No.{{reference_number}}</b><button class="print_btn" @click="print"></button></div>
         </div>
         <div class="content_5 content" v-show="tabNum == 5||tabNum == 7">
             <div class="introduction" v-show="tabNum == 5">
@@ -1213,18 +1221,23 @@
                     <tbody>
                         <tr v-show="checkbox1">
                             <td>Equity Fund</td>
-                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0">USD {{equity1|filterFun}}</td>
-                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0">USD {{equity2|filterFun}}</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0||market1>0">USD {{equity1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0||market2>0">USD {{equity2|filterFun}}</td>
                         </tr>
                         <tr v-show="checkbox2">
                             <td>Balanced Fund</td>
-                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0">USD {{balanced1|filterFun}}</td>
-                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0">USD {{balanced2|filterFun}}</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0||market1>0">USD {{balanced1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0||market2>0">USD {{balanced2|filterFun}}</td>
                         </tr>
                         <tr v-show="checkbox3">
                             <td>Stable Fund</td>
-                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0">USD {{stable1|filterFun}}</td>
-                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0">USD {{stable2|filterFun}}</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0||market1>0">USD {{stable1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0||market2>0">USD {{stable2|filterFun}}</td>
+                        </tr>
+                        <tr v-show="checkbox4">
+                            <td>Money Market Fund</td>
+                            <td align="right" v-show="equity1>0||balanced1>0||stable1>0||market1>0">USD {{market1|filterFun}}</td>
+                            <td align="right" v-show="equity2>0||balanced2>0||stable2>0||market2>0">USD {{market2|filterFun}}</td>
                         </tr>
                         <tr>
                             <td>Total investment amount</td>
@@ -1268,7 +1281,7 @@
                         </tr>
                         <tr>
                             <td>Mobile phone number:</td>
-                            <td>{{mobile}}</td>
+                            <td>+{{code}}&nbsp;{{mobile}}</td>
                         </tr>
                         <tr>
                             <td>Residential address:</td>
@@ -1379,7 +1392,7 @@
                 <li><input type="checkbox" v-model="read2">I have read and understood the AD Wealth Unit Trust Investment Overview, which set out the fees, fund selection and an explanation of how the product works. I will need this information to complete my confirmation instruction.</li>
                 <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <router-link to="/AD-Wealth-Unit-Trust-T&C-180607" target="_blank">Terms and Conditions</router-link> that apply to this investment.</li>
                 <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions</router-link> that govern the use of the AD Wealth website. </li>
-                <li><input type="checkbox" v-model="read5">All parties associated with this investment have read, understood and agree to the FATCA/CRS <a href="javascript:void(0)">Terms and Conditions</a> that relate to AD Wealth’s tax reporting obligations.</li>
+                <li><input type="checkbox" v-model="read5">All parties associated with this investment have read, understood and agree to the FATCA/CRS Terms and Conditions that relate to AD Wealth’s tax reporting obligations.</li>
             </ul>
             <div class="button_div" v-show="tabNum == 5">
                 <button @click="back" class="back_btn"></button>
@@ -1438,11 +1451,12 @@ export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:5,
+      tabNum:0,
       //   1
       checkbox1:false,
       checkbox2:false,
       checkbox3:false,
+      checkbox4:false,
       equity1:'',
       equity2:'',
       equity1_error:false,
@@ -1455,6 +1469,10 @@ export default {
       stable2:'',
       stable1_error:false,
       stable2_error:false,
+      market1:'',
+      market2:'',
+      market1_error:false,
+      market2_error:false,
       modal1:false,
       modal2:false,
       modal3:false,
@@ -1467,8 +1485,11 @@ export default {
       birth:'',
       nation:'',
       email:'',
+      code:'',
       mobile:'',
       address:'',
+      // 后台数据
+      country_code:[],
       //   3
       radio2:'',
       residence:'',
@@ -1499,19 +1520,32 @@ export default {
   },
   mounted () {
     document.title = 'AD Wealth | Invest now'
+    var self = this;
+    self.$http.get('/static/api/country_code.json',{}).then(function(res){
+            self.country_code.splice(0,self.country_code.length);
+             for(var i = 0;i<res.data.length;i++){
+                self.country_code.push({
+                    "value":res.data[i].value,
+                    "option":res.data[i].en,
+                });
+		     }
+    }).catch(function(err){
+
+    })
+
   },
   computed:{
       checkbox_fund:function(){
-          return this.checkbox1||this.checkbox2||this.checkbox3;
+          return this.checkbox1||this.checkbox2||this.checkbox3||this.checkbox4;
       },
       total_fund1:function(){
-          return (this.checkbox1?(this.equity1 == ''?0:this.equity1):0)+(this.checkbox2?(this.balanced1 == ''?0:this.balanced1):0)+(this.checkbox3?(this.stable1 == ''?0:this.stable1):0);
+          return (this.checkbox1?(this.equity1 == ''?0:this.equity1):0)+(this.checkbox2?(this.balanced1 == ''?0:this.balanced1):0)+(this.checkbox3?(this.stable1 == ''?0:this.stable1):0)+(this.checkbox4?(this.market1 == ''?0:this.market1):0);
       },
       total_fund2:function(){
-          return (this.checkbox1?(this.equity2 == ''?0:this.equity2):0)+(this.checkbox2?(this.balanced2 == ''?0:this.balanced2):0)+(this.checkbox3?(this.stable2 == ''?0:this.stable2):0);
+          return (this.checkbox1?(this.equity2 == ''?0:this.equity2):0)+(this.checkbox2?(this.balanced2 == ''?0:this.balanced2):0)+(this.checkbox3?(this.stable2 == ''?0:this.stable2):0)+(this.checkbox4?(this.market2 == ''?0:this.market2):0);
       },
       investor_next:function(){
-          if(this.title == ''||this.firstname == ''||this.surname == ''||this.passport == ''||this.birth == ''||this.nation == ''||this.email == ''||this.mobile == ''||this.address == ''){
+          if(this.title == ''||this.firstname == ''||this.surname == ''||this.passport == ''||this.birth == ''||this.nation == ''||this.email == ''||this.code == ''||this.mobile == ''||this.address == ''){
               return false;
           }else{
               return true;
@@ -1567,7 +1601,8 @@ export default {
           self.balanced2_error = false;
           self.stable1_error = false;
           self.stable2_error = false;
-        //   if(self.checkbox1&& ( (20000>self.equity1&&self.equity1>0)||!(self.equity1>=20000) ) ){
+          self.market1_error = false;
+          self.market2_error = false;
           if(self.checkbox1&& ( !(20000<=self.equity1)&&!((self.equity1 == 0||self.equity1 == '')&&(self.equity2>0)) ) ){
             self.equity1_error = true;
             return false;
@@ -1586,6 +1621,12 @@ export default {
           }else if(self.checkbox3&& ( !(2000<=self.stable2)&&!((self.stable2 == 0||self.stable2 == '')&&(self.stable1>0)) ) ){
             self.stable2_error = true;
             return false;
+          }else if(self.checkbox4&& ( !(20000<=self.market1)&&!((self.market1 == 0||self.market1 == '')&&(self.market2>0)) ) ){
+            self.market1_error = true;
+            return false;
+          }else if(self.checkbox4&& ( !(2000<=self.market2)&&!((self.market2 == 0||self.market2 == '')&&(self.market1>0)) ) ){
+            self.market2_error = true;
+            return false;
           }
           self.next();
       },
@@ -1595,10 +1636,12 @@ export default {
               self.tax_number_error = true;
               return false;
           }
-          for(let i=0;i<self.templateDate.length;i++){
-              if(self.templateDate[i].text == ''&&self.templateDate[i].select2 ==''){
-                  self.templateDate[i].error = true;
-                  return false;
+          if(self.radio3 == 'yes'){
+              for(let i=0;i<self.templateDate.length;i++){
+                    if(self.templateDate[i].text == ''&&self.templateDate[i].select2 ==''){
+                        self.templateDate[i].error = true;
+                        return false;
+                    }
               }
           }
           self.next();
@@ -1889,19 +1932,25 @@ button.print_btn{
     margin-top:15px;
 }
 .content_2 .table_div table tr td{
-    width:50%;
+    /* width:50%; */
     text-align:left;
 }
 .content_2 .table_div table tr td em{
     font-style:normal;
     font-size:10px;
 }
+/* 输入框样式 */
+.content_2 .table_div table tr td input,.content_2 .table_div table tr td select{
+    width:100%;
+    height:24px;
+}
 .content_2 .birth_td div input{
     width:27%;
 }
 .content_2 textarea{
     width:100%;
-    min-height:50px;
+    min-height:59px;
+    display:block;
 }
 
 
@@ -1977,12 +2026,12 @@ button.print_btn{
     margin-bottom:10px;
 }
 .content_7{}
-.content_7 p{
-    font-size:16px;
-    text-align:left;
-}
-.content_7 div h3{
+.content_7 h3{
     font-size:21px;
+    text-align:left;   
+}  
+.content_7 div b{
+    font-size:16px;
     height:49px;
     line-height:70px;
     float:left;

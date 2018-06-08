@@ -120,7 +120,7 @@
         <p class="title_1">9.Compliant and disputed</p>
         <p class="content_1">We will deal with any complaints and queries that You may have in line with our <router-link to="/Client-Complaint-Process-180605" target="_blank">Complaints Process.</router-link></p>
         <p class="title_1">10.Privacy</p>
-        <p class="title_2">10.1	We have a <router-link to="/Privacy-and-security-policy-180607" target="_blank">Privacy and Security Policy</router-link> in place to safeguard all Information we hold.</p>
+        <p class="title_2">10.1	We have a <router-link to="/Privacy-and-Security-Policy-180608" target="_blank">Privacy and Security Policy</router-link> in place to safeguard all Information we hold.</p>
         <p class="title_2">10.2	The AD Wealth Group is committed to protecting the privacy and confidentiality of your personal information, and will take all reasonable steps to protect your personal information, including the use of encryption technology. We cannot however guarantee the security of any information You transmit to us electronically and You do so at your own risk.</p>
         <p class="title_2">10.3	The AD Wealth Group shall not be held responsible or liable for any Loss suffered by You as a result of the unauthorized or unlawful disclosure and/or use of any of your Information by third parties who are not subject to our control.</p>
         <p class="title_1">11.Security</p>
