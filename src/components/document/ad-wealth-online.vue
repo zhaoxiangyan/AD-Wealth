@@ -1,10 +1,10 @@
 <template>
    <div class="ad-wealth-online">
-       <div class="header clearfix">
-        <div>
-            <h2>AD Wealth</h2>
+        <div class="header clearfix">
+            <div>
+                <h2>AD Wealth</h2>
+            </div>
         </div>
-     </div>
      <div class="row_1">
         <h3>AD Wealth Online Terms and Conditions</h3>
         <p class="title_1">1.Definitions and interpretation</p>

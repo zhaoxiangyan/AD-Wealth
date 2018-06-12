@@ -77,6 +77,7 @@ export default new Router({
       name: 'stable-fund',
       component: resolve => require(['../components/fund-pages/Stable-fund.vue'], resolve)
     },
+    // 管理员页面
     {
       path: '/admin',
       redirect: '/admin/home'
@@ -88,6 +89,21 @@ export default new Router({
         {
           path: '/',
           component: resolve => require(['../components/admin/Pageone.vue'], resolve)
+        }
+      ]
+    },
+    // 用户页面
+    {
+      path: '/user',
+      redirect: '/user/home'
+    },
+    {
+      path: '/user/home',
+      component: resolve => require(['../components/user/user.vue'], resolve),
+      children: [
+        {
+          path: '/',
+          component: resolve => require(['../components/user/one.vue'], resolve)
         }
       ]
     }

@@ -165,14 +165,8 @@
                                <!-- <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" v-model="birth" @on-change="birth=$event"  placeholder="Select date" style="width: 150px"></DatePicker></div></td> -->
                                <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" format="MM/dd/yyyy" v-model="birth" placeholder="Select date"></DatePicker></div></td>
                            </tr>
-                       </tbody>
-                   </table>
-                </Col>
-                <Col span="14" class="table_div">
-                   <table>
-                       <tbody>
                            <tr>
-                               <td class="red_star" style="width:28%">Nationality</td>
+                               <td class="red_star">Nationality</td>
                                <td>
                                    <select v-model="nation">
                                         <option value=""></option>
@@ -429,17 +423,31 @@
                                    </select>
                                </td>
                            </tr>
+                       </tbody>
+                   </table>
+                </Col>
+                <Col span="14" class="table_div">
+                   <table>
+                       <tbody>
                            <tr>
-                               <td class="red_star">Email address</td>
+                               <td class="red_star" style="width:28%">Email address</td>
                                <td><input type="text" v-model="email"></td>
+                           </tr>
+                           <tr>
+                               <td class="red_star">Password</td>
+                               <td><input type="password" v-model="password" placeholder="Minimum 8 characters"></td>
+                           </tr>
+                           <tr>
+                               <td class="red_star">Confirm Password</td>
+                               <td><input type="password" v-model="repassword" placeholder="Re-type password"></td>
                            </tr>
                            <tr>
                                <td class="red_star">Mobile phone number</td>
                                <td>
-                                   <select style="width:60%;border-right:none;" v-model="code">
+                                   <select style="width:40%;border-right:none;" v-model="code">
                                        <option value="" disabled selected style="color:#fff;">Country Code</option>
                                        <option v-for="(item,index) in country_code" :key="index" :value="item.value">{{item.option}}</option>
-                                   </select><input type="text" v-model="mobile" style="width:40%;">
+                                   </select><input type="text" v-model="mobile" style="width:60%;">
                                </td>
                            </tr>
                            <tr>
@@ -1392,7 +1400,6 @@
                 <li><input type="checkbox" v-model="read2">I have read and understood the AD Wealth Unit Trust Investment Overview, which set out the fees, fund selection and an explanation of how the product works. I will need this information to complete my confirmation instruction.</li>
                 <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <router-link to="/AD-Wealth-Unit-Trust-T&C-180607" target="_blank">Terms and Conditions</router-link> that apply to this investment.</li>
                 <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions</router-link> that govern the use of the AD Wealth website. </li>
-                <li><input type="checkbox" v-model="read5">All parties associated with this investment have read, understood and agree to the FATCA/CRS Terms and Conditions that relate to AD Wealth’s tax reporting obligations.</li>
             </ul>
             <div class="button_div" v-show="tabNum == 5">
                 <button @click="back" class="back_btn"></button>
@@ -1485,6 +1492,8 @@ export default {
       birth:'',
       nation:'',
       email:'',
+      password:'',
+      repassword:'',
       code:'',
       mobile:'',
       address:'',
@@ -1513,7 +1522,6 @@ export default {
       read2:false,
       read3:false,
       read4:false,
-      read5:false,
       //   6,7
       reference_number:'1517982'
     }
@@ -1545,7 +1553,7 @@ export default {
           return (this.checkbox1?(this.equity2 == ''?0:this.equity2):0)+(this.checkbox2?(this.balanced2 == ''?0:this.balanced2):0)+(this.checkbox3?(this.stable2 == ''?0:this.stable2):0)+(this.checkbox4?(this.market2 == ''?0:this.market2):0);
       },
       investor_next:function(){
-          if(this.title == ''||this.firstname == ''||this.surname == ''||this.passport == ''||this.birth == ''||this.nation == ''||this.email == ''||this.code == ''||this.mobile == ''||this.address == ''){
+          if(this.title == ''||this.firstname == ''||this.surname == ''||this.passport == ''||this.birth == ''||this.nation == ''||this.email == ''||this.password == ''||this.repassword == ''||this.code == ''||this.mobile == ''||this.address == ''){
               return false;
           }else{
               return true;
@@ -1559,7 +1567,7 @@ export default {
         }
       },
       read_submit:function(){
-          if(this.read1&&this.read2&&this.read3&&this.read4&&this.read5){
+          if(this.read1&&this.read2&&this.read3&&this.read4){
               return true;
           }else{
               return false;

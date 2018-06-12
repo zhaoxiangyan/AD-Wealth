@@ -92,7 +92,6 @@ export default {
 }
 .video_box img{
   display: none;
-  width:100%;
 }
 .video_box .text_box{
   position: absolute;
@@ -170,8 +169,9 @@ export default {
   }
   .video_box img{
     display:block;
-    width:100%;
     height:100%;
+    position: relative;
+    left:-480px;
   }
   .text_box h3{
     font-size:35px;

@@ -13,9 +13,9 @@
                   <h2>Welcome to the secure section of our website</h2>
                </Col>
                <Col :span="14">
-                  <p><b>Register for an online account</b></p>
+                  <p><b>&nbsp;</b></p>
                   <p>AD Wealth Online lets you view and manage your investments securely.</p>
-                  <p>If you do not already have an AD Wealth Online account, complete the online registration form.</p>
+                  <p>Please use your registered email address as your login user name.</p>
                   <p><b>First time investors </b></p>
                   <p>You can follow the <router-link to="invest-now">Invest Now</router-link> process to explore our funds and products and take the first step towards investing with us.</p>
                </Col>
