@@ -1,16 +1,13 @@
 import { Line } from '../chart/basecharts'
 export default {
   extends: Line,
+  props: ['datas', 'options'],
+  // Overwriting base render method with actual data.
   mounted () {
-    this.renderChart({
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-      datasets: [
-        {
-          label: 'Data One',
-          backgroundColor: '#f87979',
-          data: [40, 39, 10, 40, 39, 80, 40]
-        }
-      ]
-    }, {responsive: true, maintainAspectRatio: false})
+    // var gradient = this.$refs.canvas.getContext('2d').createLinearGradient(0, 0, 0, 450)
+    // gradient.addColorStop(0, 'rgba(255, 0,0, 0.5)')
+    // gradient.addColorStop(0.5, 'rgba(255, 0, 0, 0.25)')
+    // gradient.addColorStop(1, 'rgba(255, 0, 0, 0)')
+    this.renderChart(this.datas, this.options)
   }
 }

@@ -12,16 +12,16 @@
                        <p class="value"><b>$100,000.00</b></p>
                    </Col>
                    <Col span="24" class="btn_box">
-                       <a href="javascript:void(0)"><span>My Account</span></a>
-                       <a href="javascript:void(0)"><span>Message</span></a>
+                       <router-link class="user_btn" to="/user/account"><span>My Account</span></router-link>
+                       <a class="user_btn" href="javascript:void(0)"><span>Message</span></a>
                    </Col>
                </Row>
             </Col>
             <Col span="14">
                <Row class="menu_right" :gutter="30">
-                   <Col span="8"><router-link to="/"><span>Portfolio Account Summary</span></router-link></Col>
-                   <Col span="8"><router-link to="/"><span>Portfolio Performance</span></router-link></Col>
-                   <Col span="8"><router-link to="/user/home"><span>Transactions</span></router-link></Col>
+                   <Col span="8"><router-link class="user_btn" to="/"><span>Portfolio Account Summary</span></router-link></Col>
+                   <Col span="8"><router-link class="user_btn" to="/"><span>Portfolio Performance</span></router-link></Col>
+                   <Col span="8"><router-link class="user_btn" to="/user/home"><span>Transactions</span></router-link></Col>
                </Row>
             </Col>
         </Row>
@@ -38,7 +38,8 @@ export default {
 <style scoped>
 .user_menu{
     width:100%;
-    padding:75px 100px 0px 100px;
+    /* padding:75px 100px 0px 100px; */
+    margin-bottom:75px;
     background:#3d4669;
     color:#fff;
 }
@@ -73,16 +74,12 @@ p.value b{}
   padding:1px;
   display:inline-block;
   width:110px;
-  background:#1aa5d0;
-  background: linear-gradient(#10d5db, #256ec2);
-  background-clip: padding-box;
   border-radius:14px;
   margin-right:10px;
 }
 .btn_box a span{
   display: block;
   height:100%;
-  background:#3d466a;
   border-radius:14px;
   line-height:15px;
   padding:15px 0px;
@@ -94,28 +91,25 @@ p.value b{}
   padding:2px;
   display:inline-block;
   width:100%;
-  background:#1aa5d0;
-  background: linear-gradient(#10d5db, #256ec2);
-  background-clip: padding-box;
   border-radius:10px;
 }
 .menu_right div a span{
   display: block;
   height:100%;
-  background:#3d466a;
   border-radius:10px;
   line-height:30px;
   padding:35px 0px;
   color:#fff;
   font-size:23px;
+  /* transition: background 0.5s; */
 }
-.menu_right div a.router-link-exact-active{
+/* .menu_right div a.router-link-exact-active,.menu_right div a:hover,.btn_box a:hover{
   background:#138cd7;
   background: linear-gradient(left,#256dc2, #00aded);
   box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.15);
 }
-.menu_right div a.router-link-exact-active span{
+.menu_right div a.router-link-exact-active span,.menu_right div a:hover span,.btn_box a:hover span{
   background:#138cd7;
   background: linear-gradient(left,#256dc2, #00aded);
-}
+} */
 </style>

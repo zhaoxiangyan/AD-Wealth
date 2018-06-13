@@ -5,13 +5,13 @@
                 <h2>AD Wealth</h2>
             </div>
         </div>
-        <userMenu></userMenu>
+        <!-- <userMenu></userMenu> -->
         <router-view/>
         <div class="footer"><p>© Copyright 2018 AD Wealth Inc. All rights reserved.</p></div>
     </div>
 </template>
 <script>
-import userMenu from '../user/menu.vue'
+// import userMenu from '../user/menu.vue'
 export default {
     name: 'user',
     data () {
@@ -21,7 +21,7 @@ export default {
         document.title = 'AD Wealth | User'
     },
     components: {
-        userMenu
+        // userMenu
     }
 }
 </script>

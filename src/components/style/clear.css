@@ -12,3 +12,41 @@
    border-radius:0px;
    border-color:#a9a9a9;
 }
+/* 自定义a标签渐变按钮 */
+a.user_btn{
+    background:#1aa5d0;
+    background: linear-gradient(#10d5db, #256ec2);
+    background-clip: padding-box;
+    padding:1px;
+    border-radius:10px;
+    display:inline-block;
+}
+a.user_btn span{
+    background:#3d466a;
+    color:#fff;
+    text-align:center;
+    display:block;
+    border-radius:10px;
+    height:100%;
+}
+a.user_btn.router-link-exact-active,a.user_btn:hover{
+    background:#138cd7;
+    background: linear-gradient(to left,#256dc2, #00aded);
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.15);
+}
+a.user_btn.router-link-exact-active span,a.user_btn:hover span{
+    background:#138cd7;
+    background: linear-gradient(to left,#256dc2, #00aded);
+}
+img{
+    vertical-align:middle;
+}
+input.user_input{
+    background:transparent;
+    border:none;
+    border-bottom:1px solid #22c3ff;
+    outline:none;
+    color:#fff;
+    width:100%;
+}
+input.user_input:focus{}

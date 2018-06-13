@@ -104,6 +104,11 @@ export default new Router({
         {
           path: '/',
           component: resolve => require(['../components/user/one.vue'], resolve)
+        },
+        {
+          path: '/user/account',
+          name: 'account',
+          component: resolve => require(['../components/user/account.vue'], resolve)
         }
       ]
     }
