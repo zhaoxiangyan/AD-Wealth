@@ -31,7 +31,7 @@
                         <input :type="pwd_type?'password':'text'">
                         <span @click="pwd_type = !pwd_type"><Icon :type="pwd_type?'eye':'eye-disabled'"></Icon></span>
                       </div>
-                      <button>Log in<Icon type="log-in"></Icon></button>
+                      <button @click="login">Log in<Icon type="log-in"></Icon></button>
                       <div class="clearfix"></div>
                       <router-link to="/forgotten-password">Forgotten password?</router-link>
                       <div class="clearfix"></div>
@@ -56,6 +56,11 @@ export default {
   },
   mounted () {
     document.title = 'AD Wealth | Login'
+  },
+  methods: {
+    login(){
+      this.$router.push('/user');
+    }
   }
 }
 </script>

@@ -1,23 +1,23 @@
 <template>
     <div class="user_menu">
         <Row>
-            <Col span="10">
-               <Row>
-                   <Col span="8">
+            <Col :md="24" :lg="10">
+               <Row class="photo_account_row" type="flex" justify="center" align="bottom">
+                   <Col :md="24" :lg="8">
                       <img class="photo" src="../../assets/img/photo.png">
                    </Col>
-                   <Col span="14" offset="1">
+                   <Col :md="24" :lg="{span:15,offset:1}">
                        <p class="name">John Doe</p>
                        <label class="account">Account Value:</label>
                        <p class="value"><b>$100,000.00</b></p>
                    </Col>
-                   <Col span="24" class="btn_box">
-                       <router-link class="user_btn" to="/user/account"><span>My Account</span></router-link>
-                       <a class="user_btn" href="javascript:void(0)"><span>Message</span></a>
-                   </Col>
+               </Row>
+               <Row>
+                   <Col span="4" class="btn_box" style="padding-right:5px;"><router-link class="user_btn" to="/user/account"><span>My Account</span></router-link></Col>
+                   <Col span="4" class="btn_box" style="padding-left:5px;"><a class="user_btn" href="javascript:void(0)"><span>Message</span></a></Col>
                </Row>
             </Col>
-            <Col span="14">
+            <Col :md="24" :lg="14">
                <Row class="menu_right" :gutter="30">
                    <Col span="8"><router-link class="user_btn" to="/"><span>Portfolio Account Summary</span></router-link></Col>
                    <Col span="8"><router-link class="user_btn" to="/"><span>Portfolio Performance</span></router-link></Col>
@@ -43,39 +43,40 @@ export default {
     background:#3d4669;
     color:#fff;
 }
+.photo_account_row{
+    text-align:left;
+}
 img.photo{
     width:100%;
-    border:1px solid #fff;
+    max-width:250px;
+    /* border:1px solid #fff; */
     border-radius:27px;
     box-shadow:5px 10px 10px #2c344f;
 }
 p.name{
     font-size:30px;
-    text-align:left;
-    margin:50px 0px 30px;
+    margin:0px 0px 30px;
 }
 label.account{
     display:block;
     font-size:20px;
-    text-align:left;
     color:#c9d0e3;
 }
 p.value{
     margin-top:0px;
     font-size:40px;
-    text-align:left;
 }
 p.value b{}
 .btn_box{
-    text-align:left;
     padding-top:20px;
 }
 .btn_box a{
   padding:1px;
   display:inline-block;
-  width:110px;
+  max-width:110px;
+  width:100%;
   border-radius:14px;
-  margin-right:10px;
+  /* margin-right:10px; */
 }
 .btn_box a span{
   display: block;
@@ -98,7 +99,7 @@ p.value b{}
   height:100%;
   border-radius:10px;
   line-height:30px;
-  padding:35px 0px;
+  padding:8px 0px;
   color:#fff;
   font-size:23px;
   /* transition: background 0.5s; */
@@ -112,4 +113,11 @@ p.value b{}
   background:#138cd7;
   background: linear-gradient(left,#256dc2, #00aded);
 } */
+@media screen and (max-width:1199px){
+    .photo_account_row{
+        text-align:center;
+        margin-bottom:35px;
+    }
+}
+
 </style>

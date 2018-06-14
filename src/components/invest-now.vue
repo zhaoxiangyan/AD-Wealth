@@ -39,13 +39,13 @@
                 <div class="text">Print, sign & send us your documents</div>
             </li>
         </ul>
-        <div class="content_0 content" v-show="tabNum == 0">
+        <div class="content_0 content" v-if="tabNum == 0">
             <div class="button_div">
                 <button class="next_btn" @click="next"></button>
             </div>
             <p>AD Wealth is not authorized to and does not provide financial advice. However, we believe in the merits of independent impartial investment advice for those who lack the knowledge and skill to make their own investment decisions unaided. Please only consult with licensed financial adviser. </p>
         </div>
-        <div class="content_1 content" v-show="tabNum == 1">
+        <div class="content_1 content" v-else-if="tabNum == 1">
             <div class="introduction">
                 <p>Please select your unit trust(s) below and enter the amounts you would like to invest.<br/>You can choose to invest:</p>
                 <ul>
@@ -126,7 +126,7 @@
                 <button @click="next1" class="next_btn" :class="tabNum== 1&&checkbox_fund?'':'disabled'" :disabled="!(tabNum== 1&&checkbox_fund)"></button>
             </div>
         </div>
-        <div class="content_2 content" v-show="tabNum == 2">
+        <div class="content_2 content" v-else-if="tabNum == 2">
             <p>Please fill in your details below:</p>
             <div class="radio_div">
                 <div><input v-model="radio1" value="investor" id="investor" name="radio1" type="radio" readonly><label for="investor">I am an individual investor</label></div>
@@ -163,7 +163,7 @@
                            <tr>
                                <td class="red_star">Date of birth<em>(MM/DD/YYYY)</em></td>
                                <!-- <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" v-model="birth" @on-change="birth=$event"  placeholder="Select date" style="width: 150px"></DatePicker></div></td> -->
-                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" format="MM/dd/yyyy" v-model="birth" placeholder="Select date"></DatePicker></div></td>
+                               <td class="birth_td"><div><DatePicker class="birth_div" type="date" size="small" format="MM/dd/yyyy" :options="birth_options" :start-date="new Date(1990, 1, 1)" v-model="birth" placeholder="Select date"></DatePicker></div></td>
                            </tr>
                            <tr>
                                <td class="red_star">Nationality</td>
@@ -459,12 +459,13 @@
                 </Col>
             </Row>
             <p class="red_star">Compulsory information</p>
+            <p v-show="details_error" class="red_star error_text">{{details_error_text}}</p>
             <div class="button_div">
                 <button @click="back" class="back_btn"></button>
-                <button @click="next" class="next_btn" :class="tabNum == 2&&investor_next?'':'disabled'" :disabled="!(tabNum == 2&&investor_next)"></button>
+                <button @click="next2" class="next_btn" :class="tabNum == 2&&investor_next?'':'disabled'" :disabled="!(tabNum == 2&&investor_next)"></button>
             </div>
         </div>
-        <div class="content_3 content" v-show="tabNum == 3">
+        <div class="content_3 content" v-else-if="tabNum == 3">
             <h3>Tax Information</h3>
             <div class="table_div">
                 <table class="table_tax1">
@@ -1067,7 +1068,12 @@
                         <tr>
                             <td>Tax identification number</td>
                             <td>
-                                <input type="text" v-model="item.text" @blur.once="item.error = true"><span class="error" :style="{'visibility':item.error&&item_result(index)?'visible':'hidden'}"></span>
+                                <input type="text" v-model="item.text" @blur.once="item.error = true">
+                                <Tooltip placement="right-start" transfer :style="{'visibility':item.error&&item_result(index)?'visible':'hidden'}">
+                                    <span class="error"></span>
+                                    <div slot="content" style="white-space:normal;">Please enter a valid tax identification number, or indicate a reason for not providing a tax identification number.</div>
+                                </Tooltip>
+                                <!-- <span class="error" :style="{'visibility':item.error&&item_result(index)?'visible':'hidden'}"></span> -->
                                 <!-- <a class="error" title="Please enter a valid tax identification number, or indicate a reason for not providing a tax identification number">&nbsp;</a> -->
                             </td>
                         </tr>
@@ -1129,12 +1135,13 @@
                 </table>
             </div>
             <p class="red_star">Compulsory information</p>
+            <p v-show="tax_error" class="red_star error_text">{{tax_error_text}}</p>
             <div class="button_div">
                 <button @click="back" class="back_btn"></button>
                 <button @click="next3" class="next_btn" :class="tabNum == 3?'':'disabled'" :disabled="tabNum !== 3"></button>
             </div>
         </div>
-        <div class="content_4 content" v-show="tabNum == 4">
+        <div class="content_4 content" v-else-if="tabNum == 4">
             <div class="table_div">
                 <h3>Your Investment Details</h3>
                 <table>
@@ -1198,16 +1205,17 @@
                 </table>
             </div>
             <p class="red_star">Compulsory information</p>
+            <p v-show="four_error" class="red_star error_text">{{four_error_text}}</p>
             <div class="button_div">
                 <button @click="back" class="back_btn"></button>
-                <button @click="next" class="next_btn" :class="tabNum == 4?'':'disabled'" :disabled="tabNum !== 4"></button>
+                <button @click="next4" class="next_btn" :class="tabNum == 4?'':'disabled'" :disabled="tabNum !== 4"></button>
             </div>
         </div>
-        <div class="content_7 content" v-show="tabNum == 7">
+        <div class="content_7 content" v-else-if="tabNum == 7">
             <h3>AD Wealth</h3>
             <div class="clearfix"><b>Summary - Ref.No.{{reference_number}}</b><button class="print_btn" @click="print"></button></div>
         </div>
-        <div class="content_5 content" v-show="tabNum == 5||tabNum == 7">
+        <div class="content_5 content" v-if="tabNum == 5||tabNum == 7">
             <div class="introduction" v-show="tabNum == 5">
                 <p>Please do the following:</p>
                 <ul>
@@ -1403,10 +1411,10 @@
             </ul>
             <div class="button_div" v-show="tabNum == 5">
                 <button @click="back" class="back_btn"></button>
-                <button @click="next" class="submit_btn" :class="tabNum == 5&&read_submit?'':'disabled'" :disabled="!(tabNum == 5&&read_submit)"></button>
+                <button @click="submit" class="submit_btn" :class="tabNum == 5&&read_submit?'':'disabled'" :disabled="!(tabNum == 5&&read_submit)"></button>
             </div>
         </div>
-        <div class="content_6 content" v-show="tabNum == 6||tabNum == 7">
+        <div class="content_6 content" v-if="tabNum == 6||tabNum == 7">
             <p v-show="tabNum == 6">Thank you for submitting your investment online. Your reference number is {{reference_number}}.</p>
             <p v-show="tabNum == 6">Your supporting documents have been emailed to you. We will process your investment once we have received a signed copy of these documents.</p>
             <button class="print_btn" @click="next" v-show="tabNum == 6"></button>
@@ -1458,7 +1466,7 @@ export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:0,
+      tabNum:4,
       //   1
       checkbox1:false,
       checkbox2:false,
@@ -1490,6 +1498,11 @@ export default {
       surname:'',
       passport:'',
       birth:'',
+      birth_options:{
+          disabledDate (date) {
+            return date && date.valueOf() > Date.now() - 568080000000;
+          }
+      },
       nation:'',
       email:'',
       password:'',
@@ -1497,7 +1510,9 @@ export default {
       code:'',
       mobile:'',
       address:'',
-      // 后台数据
+      details_error:false,
+      details_error_text:'error',
+      // 前端模拟后台数据
       country_code:[],
       //   3
       radio2:'',
@@ -1510,12 +1525,16 @@ export default {
       templateDate:[{select1:'',text:'',select2:'',error:false}],
       radio4:'',
       radio5:'',
+      tax_error:false,
+      tax_error_text:'error',
       //   4
       radio6:'',
       other_text:'',
       select1:'',
       radio7:'',
       radio8:'',
+      four_error:false,
+      four_error_text:'error',
       //   5
       total:50000,
       read1:false,
@@ -1638,20 +1657,86 @@ export default {
           }
           self.next();
       },
+      next2(){
+          var self = this;
+          let emailReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+          let pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+        //   8-16位字母和数字的组合
+          self.details_error = false;
+          if(self.birth.valueOf()>(new Date().valueOf() - 567993600000)){
+             self.details_error_text = 'Sorry,We do not accept investors under the age of 18';
+             self.details_error = true;
+             return false;
+          }else if(!emailReg.test(self.email)){
+              self.details_error_text = 'Please enter email address in the correct format';
+              self.details_error = true;
+              return false;
+          }else if(!pswReg.test(self.password)){
+              self.details_error_text = 'Please enter password in the correct format(8-16 digits and letters)';
+              self.details_error = true;
+              return false;
+          }else if(self.repassword !== self.password){
+              self.details_error_text = 'Two password inconsistencies';
+              self.details_error = true;
+              return false;
+          }else{
+              self.next();
+          } 
+      },
       next3(){
           var self = this;
-          if(self.tax_number == ''&& self.tax_number_reason == ''){
-              self.tax_number_error = true;
-              return false;
-          }
+          self.tax_error = false;
           if(self.radio3 == 'yes'){
               for(let i=0;i<self.templateDate.length;i++){
                     if(self.templateDate[i].text == ''&&self.templateDate[i].select2 ==''){
                         self.templateDate[i].error = true;
                         return false;
+                    }else if(self.templateDate[i].select1 == ''){
+                        self.tax_error_text = 'Please choose the country';
+                        self.tax_error = true;
+                        return false;
+                    }else if(i==self.templateDate.length){
+                        break;
                     }
               }
           }
+          if(self.radio2 == ''||self.radio3 == ''||self.radio4 == ''){
+              self.tax_error_text = 'Please choose the option';
+              self.tax_error = true;
+              return false;
+          }else if(self.radio2 == 'no'&& self.residence == ''){
+              self.tax_error_text = 'Please choose country of residence for tax purposes';
+              self.tax_error = true;
+              return false;
+          }else if(self.tax_number == ''&& self.tax_number_reason == ''){
+              self.tax_number_error = true;
+              return false;
+          }else if(self.radio4 == 'yes'&&self.radio5 == ''){
+              self.tax_error_text = 'Please choose the option';
+              self.tax_error = true;
+              return false;
+          }else{
+              self.next();
+          }   
+      },
+      next4(){
+          var self = this;
+          self.four_error = false;
+          if(self.radio6 == ''||self.radio7 == ''||self.radio8 == ''||self.select1 == ''){
+              self.four_error_text = 'Please choose the option';
+              self.four_error = true;
+              return false;
+          }else if(self.radio6 == '0'&&self.other_text == ''){
+              self.four_error_text = 'Please enter Specify';
+              self.four_error = true;
+              return false;
+          }else{
+              self.next();
+          }  
+      },
+      submit(){
+          var self = this;
+        //   加入ajax向后台发送数据  是否需要返回一个NO号
           self.next();
       },
       print(){
@@ -1659,7 +1744,7 @@ export default {
           window.location.reload();
       },
       addMore(){
-          if(this.templateNumber>9){
+          if(this.templateNumber>1){
               return false;
           }
           this.templateNumber++;
@@ -1912,7 +1997,9 @@ button.print_btn{
     text-align:left;
     margin:10px 0px 15px;
 }
-
+p.error_text{
+    color:red;
+}
 .content_2 .radio_div{
     text-align:left;
 }

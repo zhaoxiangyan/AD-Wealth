@@ -2,20 +2,20 @@
     <div class="one">
         <userMenu></userMenu>
         <Row>
-            <Col span="12" class="ring_col">
+            <Col :md="24" :lg="12" class="ring_col">
                <h3>Portfolio</h3>
-               <doughnut :datas="doughnut_data" :height="740" :options="doughnut_options"></doughnut>
+               <doughnut :datas="doughnut_data" :height="340" :options="doughnut_options"></doughnut>
             </Col>
-            <Col span="11" offset="1">
+            <Col :md="24" :lg="{span:11,offset:1}" >
                 <Row class="fund_row">
                     <h3>ADW Unit Trust</h3>
                     <Col class="fund_col">
                         <Row>
-                            <Col span="9" class="_left">
+                            <Col span="10" class="_left">
                                <p>Equity Fund</p>
                                <p>YTD(Daily)<span>+5.28%</span></p>
                             </Col>
-                            <Col span="9" class="_middle">
+                            <Col span="8" class="_middle">
                                <p>1&nbsp;Yr&nbsp;+8.25%</p>
                                <p>3&nbsp;Yrs&nbsp;+10.10%</p>
                                <p>5&nbsp;Yrs</p>
@@ -28,11 +28,11 @@
                     </Col>
                     <Col class="fund_col">
                         <Row>
-                            <Col span="9" class="_left">
+                            <Col span="10" class="_left">
                                <p>Balanced Fund</p>
                                <p>YTD(Daily)<span>+5.28%</span></p>
                             </Col>
-                            <Col span="9" class="_middle">
+                            <Col span="8" class="_middle">
                                <p>1&nbsp;Yr&nbsp;+8.25%</p>
                                <p>3&nbsp;Yrs&nbsp;+10.10%</p>
                                <p>5&nbsp;Yrs</p>
@@ -45,11 +45,11 @@
                     </Col>
                     <Col class="fund_col">
                         <Row>
-                            <Col span="9" class="_left">
+                            <Col span="10" class="_left">
                                <p>Stable Fund</p>
                                <p>YTD(Daily)<span>+5.28%</span></p>
                             </Col>
-                            <Col span="9" class="_middle">
+                            <Col span="8" class="_middle">
                                <p>1&nbsp;Yr&nbsp;+8.25%</p>
                                <p>3&nbsp;Yrs&nbsp;+10.10%</p>
                                <p>5&nbsp;Yrs</p>
@@ -62,11 +62,11 @@
                     </Col>
                     <Col class="fund_col">
                         <Row>
-                            <Col span="9" class="_left">
+                            <Col span="10" class="_left">
                                <p>Money Market Fund</p>
                                <p>YTD(Daily)<span>+5.28%</span></p>
                             </Col>
-                            <Col span="9" class="_middle">
+                            <Col span="8" class="_middle">
                                <p>1&nbsp;Yr&nbsp;+8.25%</p>
                                <p>3&nbsp;Yrs&nbsp;+10.10%</p>
                                <p>5&nbsp;Yrs</p>
@@ -236,5 +236,16 @@ export default {
 .fund_col .ivu-row ._right{
     height:100%;
     overflow:hidden;
+}
+@media screen and (max-width:1199px){
+    .fund_row h3{
+        position:static;
+        margin-top:35px;
+    }
+}
+@media screen and (max-width:850px){
+    .one{
+        padding:35px;
+    }
 }
 </style>

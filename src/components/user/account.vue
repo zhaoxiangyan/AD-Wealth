@@ -8,19 +8,21 @@
         </div>
         <div class="user_account">
             <Row class="photo_row" type="flex" justify="center" align="middle">
-                <Col span="3">
+                <Col :md="4" :lg="3">
                    <img src="../../assets/img/photo.png">
                 </Col>
-                <Col span="21" class="photo_text_col">
+                <Col :md="20" :lg="21" class="photo_text_col">
                    <p>Change Avatar Image</p>
-                   <a href="javascript:void(0)" class="user_btn"><span>Upload new image</span></a>
+                   <Upload action="ad-wealth/avatar">
+                      <a href="javascript:void(0)" class="user_btn"><span>Upload new image</span></a>
+                   </Upload>
                 </Col>
             </Row>
             <Row class="title_row">
                 <Col>Personal information</Col>
             </Row>
             <Row class="personal_row" type="flex" justify="center" align="bottom">
-                <Col span="10" class="left_col">
+                <Col :xs="24" :lg="10" class="left_col">
                     <Row>
                         <Col span="11">Name:</Col>
                         <Col span="13">John Doe</Col>
@@ -35,17 +37,17 @@
                     </Row>
                     <Row>
                         <Col span="11">Password:</Col>
-                        <Col span="13" class="password_col"><input class="user_input" v-bind:value="password" readonly><Icon type="eye"></Icon></Col>
+                        <Col span="13" class="password_col"><input class="user_input" v-bind:value="password" :type="password_type?'password':'text'" readonly><span @click="password_type = !password_type"><Icon  :type="password_type?'eye':'eye-disabled'"></Icon></span></Col>
                     </Row>
                 </Col>
-                <Col span="14" class="right_col">
-                    <Row>
-                        <Col span="5"><i class="change"></i>Change</Col>
-                        <Col span="6">New Email address:</Col>
-                        <Col span="13">
-                            <Row class="send_row" :gutter="30">
-                                <Col span="12"><input class="user_input"></Col>
-                                <a class="user_btn" href="javascript:void(0)"><span>Send verification email</span></a>
+                <Col :md="24" :lg="14" class="right_col">
+                    <Row type="flex" justify="center" align="bottom">
+                        <Col :md="5"><i class="change"></i>Change</Col>
+                        <Col :md="6">New Email address:</Col>
+                        <Col :md="13">
+                            <Row class="send_row" :gutter="30" type="flex" justify="center" align="bottom">
+                                <Col :md="12"><input class="user_input"></Col>
+                                <Col :md="12" class="send_btn_col"><a class="user_btn" href="javascript:void(0)"><span>Send verification email</span></a></Col>
                             </Row>
                         </Col>
                     </Row>
@@ -54,9 +56,9 @@
                         <Col span="6">New Password:</Col>
                         <Col span="13">
                             <Row class="new_password_row"  :gutter="30">
-                                <Col span="12"><input class="user_input"></Col>
-                                <Col span="12"><input class="user_input"></Col>
-                                <a class="user_btn" href="javascript:void(0)"><span>Save</span></a>
+                                <Col span="12"><input class="user_input" type="password" placeholder="Type new password"></Col>
+                                <Col span="12"><input class="user_input" type="password" placeholder="Retype new password"></Col>
+                                <Col span="24"><a class="user_btn" href="javascript:void(0)"><span>Save</span></a></Col>
                             </Row>
                         </Col>
                     </Row>
@@ -64,7 +66,7 @@
             </Row>
 
             <Row class="address_row" type="flex" justify="center" align="bottom">
-                <Col span="10" class="left_col">
+                <Col :xs="24" :lg="10" class="left_col">
                     <Row>
                         <Col span="11" class="blue_star_after">Registered Address:</Col>
                         <Col span="13">No.123, Any St.</Col>
@@ -82,15 +84,15 @@
                         <Col span="13">China</Col>
                     </Row>
                 </Col>
-                <Col span="14" class="blue_star_before right_col">
+                <Col :md="24" :lg="14" class="blue_star_before right_col">
                     Registered address can be changed by sending your latest proof of address to us via Email
                 </Col>
             </Row>
             
             <Row class="bank_row">
-                <Col span="10" class="left_col">
+                <Col :md="24" :lg="10" class="left_col">
                     <Row>
-                        <Col span="11" class="blue_star_after">Registered banking details:</Col>
+                        <Col span="11">Registered banking details:</Col>
                         <Col span="13">1</Col>
                     </Row>
                     <Row>
@@ -110,7 +112,7 @@
                         <Col span="13">5</Col>
                     </Row>
                 </Col>
-                <Col span="14" class="right_col">
+                <Col :md="24" :lg="14" class="right_col">
                     <Row>
                         <Col span="5"><i class="change"></i>Change</Col>
                         <Col span="6">New banking details:</Col>
@@ -146,6 +148,7 @@ export default {
     name: 'account',
     data () {
         return {
+            password_type:true,
             password:'1212121212001478'
         }
     }
@@ -196,9 +199,9 @@ export default {
     padding-left:40px;
 }
 .photo_row div img{
-    max-width:210px;
+    max-width:250px;
     width:100%;
-    border:1px solid #fff;
+    /* border:1px solid #fff; */
     border-radius:27px;
     box-shadow:5px 10px 10px #2c344f;
 }
@@ -219,7 +222,10 @@ export default {
     margin-top:25px;
 }
 .personal_row{}
-.left_col .ivu-row,.right_col>.ivu-row{
+.left_col .ivu-row .ivu-col,.right_col>.ivu-row>.ivu-col{
+    margin-top:35px;
+}
+.address_row .right_col{
     margin-top:35px;
 }
 .left_col .ivu-row>div:first-child{
@@ -244,32 +250,44 @@ export default {
     margin-right:20px;
     background:url('../../assets/img/change_icon.png') no-repeat;
 }
-.new_password_row a.user_btn,.save_col a.user_btn{
+.new_password_row a.user_btn{
     position:absolute;
-    right:0px;
+    right:15px;
     bottom:-60px;
-    height:46px;
 }
 .save_col a.user_btn{
+    position:absolute;
+    right:0px;
     bottom:-33px;
 }
 .new_password_row a.user_btn span,.save_col a.user_btn span{
-    padding:0px 40px;
-    line-height:44px;
+    padding:10px 40px;
     font-size:16px;
+}
+.send_row .ivu-col{
+    text-align:right;
 }
 .send_row a.user_btn{
     /* height:46px; */
-    position:absolute;
+    /* position:absolute; */
     right:0px;
-    bottom:0px;
+    bottom:-34px;
+    width:100%;
+    max-width:225px;
 }
 .send_row a.user_btn span{
-    padding:0px 30px;
-    line-height:44px;
+    padding:10px 30px;
     font-size:16px;
 }
 .address_row .right_col{
     color:#fff;
+}
+.blue_star_before:before{
+    content:'*';
+    color:#14c6d1;
+}
+.blue_star_after:after{
+    content:'*';
+    color:#14c6d1;
 }
 </style>
