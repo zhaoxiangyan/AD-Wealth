@@ -50,3 +50,8 @@ input.user_input{
     width:100%;
 }
 input.user_input:focus{}
+.ivu-badge-dot{
+    top:0px;
+    right:-4px;
+    background:#1aa5d0;
+}
