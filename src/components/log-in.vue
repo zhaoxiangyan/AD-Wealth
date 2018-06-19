@@ -3,7 +3,7 @@
      <div class="header clearfix">
         <div>
             <h2>AD Wealth</h2>
-            <router-link to="/invest-now" class="invest">INVEST NOW</router-link>
+            <router-link to="/adw/invest-now" class="invest">INVEST NOW</router-link>
         </div>
      </div>
      <div class="row_1">
@@ -33,10 +33,10 @@
                       </div>
                       <button @click="login">Log in<Icon type="log-in"></Icon></button>
                       <div class="clearfix"></div>
-                      <router-link to="/forgotten-password">Forgotten password?</router-link>
+                      <router-link to="/adw/forgotten-password">Forgotten password?</router-link>
                       <div class="clearfix"></div>
                   </div>
-                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions.</router-link></p>
+                  <p>By signing in to AD Wealth Online you are confirming that you have read and understood our <router-link to="/adw/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions.</router-link></p>
                </Col>
            </Row>
        </div>
@@ -59,7 +59,7 @@ export default {
   },
   methods: {
     login(){
-      this.$router.push('/user');
+      this.$router.push('/adw/user');
     }
   }
 }

@@ -3,7 +3,7 @@
     <div class="header clearfix" v-show="tabNum !== 7">
         <div>
             <h2>AD Wealth</h2>
-            <router-link to="/log-in" class="login">LOG IN</router-link>
+            <router-link to="/adw/log-in" class="login">LOG IN</router-link>
         </div>
     </div>
     <div class="row_1">    
@@ -1406,8 +1406,8 @@
                 <b>Please read the documents below.</b>
                 <li><input type="checkbox" v-model="read1">I have read and understood the relevant fund factsheet (minimum disclosure document) of the unit trusts I wish to invest.</li>
                 <li><input type="checkbox" v-model="read2">I have read and understood the AD Wealth Unit Trust Investment Overview, which set out the fees, fund selection and an explanation of how the product works. I will need this information to complete my confirmation instruction.</li>
-                <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <router-link to="/AD-Wealth-Unit-Trust-T&C-180607" target="_blank">Terms and Conditions</router-link> that apply to this investment.</li>
-                <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <router-link to="/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions</router-link> that govern the use of the AD Wealth website. </li>
+                <li><input type="checkbox" v-model="read3">I have read, understood and agree to the <router-link to="/adw/AD-Wealth-Unit-Trust-T&C-180607" target="_blank">Terms and Conditions</router-link> that apply to this investment.</li>
+                <li><input type="checkbox" v-model="read4">I have read, understood and agree to the <router-link to="/adw/AD-Wealth-Online-T&C-180605" target="_blank">Terms and Conditions</router-link> that govern the use of the AD Wealth website. </li>
             </ul>
             <div class="button_div" v-show="tabNum == 5">
                 <button @click="back" class="back_btn"></button>
@@ -1462,11 +1462,12 @@
 
 <script>
 import moment from 'moment'
+import code from '../../static/api/country_code.json'
 export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:4,
+      tabNum:0,
       //   1
       checkbox1:false,
       checkbox2:false,
@@ -1542,24 +1543,32 @@ export default {
       read3:false,
       read4:false,
       //   6,7
-      reference_number:'1517982'
+      reference_number:'1517982',
+      //   防止重复发送ajax
+      ajax:false
     }
   },
   mounted () {
     document.title = 'AD Wealth | Invest now'
     var self = this;
-    self.$http.get('/static/api/country_code.json',{}).then(function(res){
-            self.country_code.splice(0,self.country_code.length);
-             for(var i = 0;i<res.data.length;i++){
-                self.country_code.push({
-                    "value":res.data[i].value,
-                    "option":res.data[i].en,
-                });
-		     }
-    }).catch(function(err){
+    // self.$http.get('/static/api/country_code.json',{}).then(function(res){
+    //         self.country_code.splice(0,self.country_code.length);
+    //          for(var i = 0;i<res.data.length;i++){
+    //             self.country_code.push({
+    //                 "value":res.data[i].value,
+    //                 "option":res.data[i].en,
+    //             });
+	// 	     }
+    // }).catch(function(err){
 
-    })
-
+    // })
+    self.country_code.splice(0,self.country_code.length);
+        for(var i = 0;i<code.length;i++){
+        self.country_code.push({
+            "value":code[i].value,
+            "option":code[i].en,
+        });
+    }
   },
   computed:{
       checkbox_fund:function(){
@@ -1737,6 +1746,54 @@ export default {
       submit(){
           var self = this;
         //   加入ajax向后台发送数据  是否需要返回一个NO号
+        //   self.ajax = true;
+          let tax_information_value = [];
+          tax_information_value.push({"country_residence_tax":self.radio2 == 'yes'?'BELIZE':self.residence,"tax_identification_number":self.tax_number == ''?self.tax_number_reason:self.tax_number});
+          if(self.radio3 == 'yes'){
+              for(let i=0;i<self.templateDate.length;i++){
+                    tax_information_value.push({"country_residence_tax":self.templateDate[i].select1,"tax_identification_number":self.templateDate[i].text == ''?self.templateDate[i].select2:self.templateDate[i].text});
+                    if(i==self.templateDate.length){
+                        break;
+                    }
+              }
+          }
+        //   self.$http.post('/user', {
+        //         equity_whole:self.equity1,
+        //         equity_monthly:self.equity2,
+        //         balanced_whole:self.balanced1,
+        //         balanced_monthly:self.balanced2,
+        //         stable_whole:self.self.stable1,
+        //         stable_monthly:self.stable2,
+        //         total_whole:self.total_fund1,
+        //         total_monthly:self.total_fund2,
+        //         title:self.title,
+        //         firstname:self.firstname,
+        //         surname:self.surname,
+        //         identification:self.passport,
+        //         birth:self.birth,
+        //         nationality:self.nation,
+        //         email:self.email,
+        //         password:self.password,
+        //         country_code:self.code,
+        //         mobile_phone:self.mobile,
+        //         residential_address:self.address,
+        //         //  数据表子表
+        //         tax_information:tax_information_value,
+        //         us_person:self.radio4,
+        //         us_tax:self.radio4 == 'yes'?self.radio5:'',
+        //         where_money:self.radio6 == '0'?self.other_text:self.radio6,
+        //         how_invest:self.select1,
+        //         distribution_details:self.radio7,
+        //         have_financial_adviser:self.radio8
+        //     }).then(function (res) {
+        //         console.log('success');
+        //         console.log(res); 
+        //         self.ajax = false;
+        //     }).catch(function (err) {
+        //         console.log('error');
+        //         console.log(err);
+        //         self.ajax = false;
+        //     });
           self.next();
       },
       print(){

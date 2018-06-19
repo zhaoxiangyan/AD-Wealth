@@ -24,7 +24,7 @@
                                 <p>10&nbsp;Yrs</p>
                                 </Col>
                                 <Col span="6" class="_right">
-                                <linechart :datas="line1_data" :height="150" :width="150" :options="line_options"></linechart>
+                                <linechart :datas="line1_data" :height="100" :width="150" :options="line_options"></linechart>
                                 </Col>
                             </Row>
                         </Col>
@@ -41,7 +41,7 @@
                                 <p>10&nbsp;Yrs</p>
                                 </Col>
                                 <Col span="6" class="_right">
-                                <linechart :datas="line2_data"  :height="150" :width="150" :options="line_options"></linechart>
+                                <linechart :datas="line2_data"  :height="100" :width="150"  :options="line_options"></linechart>
                                 </Col>
                             </Row>
                         </Col>
@@ -58,7 +58,7 @@
                                 <p>10&nbsp;Yrs</p>
                                 </Col>
                                 <Col span="6" class="_right">
-                                <linechart  :datas="line3_data"  :height="150" :width="150" :options="line_options"></linechart>
+                                <linechart  :datas="line3_data"  :height="100" :width="150" :options="line_options"></linechart>
                                 </Col>
                             </Row>
                         </Col>
@@ -75,7 +75,7 @@
                                 <p>10&nbsp;Yrs</p>
                                 </Col>
                                 <Col span="6" class="_right">
-                                <linechart :datas="line4_data"  :height="150" :width="150" :options="line_options"></linechart>
+                                <linechart :datas="line4_data"  :height="100" :width="150" :options="line_options"></linechart>
                                 </Col>
                             </Row>
                         </Col>
@@ -139,7 +139,7 @@
 <script>
 import Doughnut from '../chart/doughnut'
 import Linechart from '../chart/line'
-import userMenu from '../user/menu.vue'
+import userMenu from '../user/menu'
 import ICountUp from 'vue-countup-v2'
 export default {
     name: 'one',
@@ -177,9 +177,9 @@ export default {
                 datasets: [
                     {
                     label: 'Equity Fund',
-                    borderColor: '#f87979',
+                    borderColor: '#3ac45d',
                     pointRadius: 0,
-                    data: [40, 39, 10, 40, 39, 80, 40]
+                    data: [40, 39, 10, 40, 39, 80, 85]
                     }
                 ]
             },
@@ -189,9 +189,9 @@ export default {
                     {
                     label: 'Balanced Fund',
                     // backgroundColor: '#f87979',
-                    borderColor: '#f87979',
+                    borderColor: '#3ac45d',
                     pointRadius: 0,
-                    data: [40, 39, 10, 40, 39, 80, 40]
+                    data: [40, 39, 10, 40, 39, 80, 90]
                     }
                 ]
             },
@@ -215,20 +215,38 @@ export default {
                     // backgroundColor: '#3ac45d',
                     borderColor: '#3ac45d',
                     pointRadius: 0,
-                    data: [40, 39, 10, 40, 39, 80, 40]
+                    data: [40, 39, 10, 40, 39, 60, 80]
                     }
                 ]
             },
             line_options: {
                 responsive: false,
                 maintainAspectRatio: false,
+                scales: {
+                    // yAxes: [{
+                    //     ticks: {
+                    //         callback: function(value, index, values) {
+                    //             return ;
+                    //         }
+                    //     }
+                    // }],
+                    xAxes: [{
+                        ticks: {
+                            // Include a dollar sign in the ticks
+                            // 如果回调返回null或undefined关联的网格线将被隐藏。
+                            callback: function(value, index, values) {
+                                return ;
+                            }
+                        }
+                    }]
+                },
                 legend: {
                     display:false
                 },
                 cutoutPercentage:60
             },
             // 右侧tab选项卡
-            tabnum:1,
+            tabnum:3,
             // 渐变数字
             startVal1: 0,
             endVal1: 2132.25,

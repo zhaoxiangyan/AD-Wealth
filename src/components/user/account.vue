@@ -3,7 +3,7 @@
         <div class="account_box">
             <div class="top clearfix">
                 <h3>My&nbsp;Account</h3>
-                <router-link class="user_btn" to="/user">
+                <router-link class="user_btn" to="/adw/user">
                     <span>Dashboard</span>
                 </router-link>
             </div>

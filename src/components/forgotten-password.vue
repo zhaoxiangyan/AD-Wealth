@@ -3,7 +3,7 @@
      <div class="header clearfix">
         <div>
             <h2>AD Wealth</h2>
-            <router-link to="/invest-now" class="invest">INVEST NOW</router-link>
+            <router-link to="/adw/invest-now" class="invest">INVEST NOW</router-link>
         </div>
      </div>
      <div class="row_1">
@@ -18,7 +18,7 @@
               <button>Send</button>
               <div class="clearfix"></div>
           </div>
-          <router-link to="/log-in" class="log-in">Log in</router-link>
+          <router-link to="/adw/log-in" class="log-in">Log in</router-link>
           <div class="clearfix"></div>
        </div>
      </div>

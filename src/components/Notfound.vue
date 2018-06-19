@@ -1,7 +1,7 @@
 <template>
  <div class="notfound">
     <p class="sorry_box"><span class="sorry">抱歉</span>，您所访问的页面不存在...</p>
-    <p class="timeout"><span class="countdown">{{time}}</span>秒后自动跳转到<a href="/">AD Wealth</a></p>
+    <p class="timeout"><span class="countdown">{{time}}</span>秒后自动跳转到<a href="/adw/">AD Wealth</a></p>
  </div>
 </template>
 <script>
@@ -24,7 +24,7 @@ export default {
           self.time = _step;
           _step-=1;
           if(_step<= 0){
-              self.$router.push('/');
+              self.$router.push('/adw/');
               clearInterval(_res);
           }
       },1000);

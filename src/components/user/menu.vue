@@ -13,8 +13,8 @@
                    </Col>
                </Row>
                <Row>
-                   <Col span="4" class="btn_box" style="padding-right:5px;"><router-link class="user_btn" to="/user/account"><span>My Account</span></router-link></Col>
-                   <Col span="4" class="btn_box" style="padding-left:5px;"><Badge dot><router-link to="/user/message" class="user_btn sup_after" href="javascript:void(0)"><span>Message</span></router-link></Badge></Col>
+                   <Col span="4" class="btn_box" style="padding-right:5px;"><router-link class="user_btn" to="/adw/user/account"><span>My Account</span></router-link></Col>
+                   <Col span="4" class="btn_box" style="padding-left:5px;"><Badge dot><router-link to="/adw/user/message" class="user_btn sup_after" href="javascript:void(0)"><span>Message</span></router-link></Badge></Col>
                </Row>
             </Col>
             <Col :md="24" :lg="14">
