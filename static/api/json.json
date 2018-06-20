@@ -1,29 +1,36 @@
+ 
 {
-    "equity_whole":self.equity1,
-    "equity_monthly":self.equity2,
-    "balanced_whole":self.balanced1,
-    "balanced_monthly":self.balanced2,
-    "stable_whole":self.self.stable1,
-    "stable_monthly":self.stable2,
-    "total_whole":self.total_fund1,
-    "total_monthly":self.total_fund2,
-    "title:self".title,
-    "firstname:self.firstname,
-    "surname:self.surname,
-    "identification:self.passport,
-    "birth:self.birth,
-    "nationality:self.nation,
-    "email:self.email,
-    "password:self.password,
-    "country_code:self.code,
-    "mobile_phone:self.mobile,
-    "residential_address:self.address,
-    //  数据表子表
-    "tax_information:tax_information_value,
-    "us_person:self.radio4,
-    "us_tax:self.radio4 == 'yes'?self.radio5:'',
-    "where_money:self.radio6 == '0'?self.other_text:self.radio6,
-    "how_invest:self.select1,
-    "distribution_details:self.radio7,
-    "have_financial_adviser:self.radio8
+// invest-now 注册 api
+    // "fund": [
+    //     {"name":"equity","value":[{"k":"equity_whole","v":1000},{"k":"equity_monthly","v":""}]},
+    //     {"name":"balanced","value":[{"k":"balanced_whole","v":1000},{"k":"balanced_monthly","v":""}]},
+    //     {"name":"stable","value":[{"k":"stable_whole","v":1000},{"k":"stable_monthly","v":""}]},
+    //     {"name":"market","value":[{"k":"market_whole","v":1000},{"k":"market_monthly","v":2000}]},
+    //     {"name":"total","value":[{"k":"total_whole","v":1000},{"k":"total_monthly","v":""}]}
+    // ],
+    "fund":'[{"name":"equity","value":[{"k":"equity_whole","v":1000},{"k":"equity_monthly","v":""}]},{"name":"balanced","value":[{"k":"balanced_whole","v":1000},{"k":"balanced_monthly","v":""}]},{"name":"stable","value":[{"k":"stable_whole","v":1000},{"k":"stable_monthly","v":""}]},{"name":"market","value":[{"k":"market_whole","v":1000},{"k":"market_monthly","v":2000}]},{"name":"total","value":[{"k":"total_whole","v":1000},{"k":"total_monthly","v":""}]}]',
+    // 以上为数字类型或者为""
+    "title":"Mr.",
+    "firstname":"Andy",
+    "surname":"Zhao",
+    "identification":"360421199312141210",
+    "birth": Mon Feb 12 1990 00:00:00 GMT+0800 (中国标准时间), // 时间格式可变
+    "nationality":"CHINA",
+    "email":"987670346@qq.com",
+    "password":"yan151798",
+    "countryCode":"86",
+    "mobilePhone":"15179852474",
+    "residentialAddress":"广东深圳",
+    // "tax_information":[
+    //     {"country_residence_tax":"BELIZE","tax_identification_number":"151563112"},
+    //     {"country_residence_tax":"BELIZE","tax_identification_number":"TIN disclosure not required"}
+    // ],  
+    //长度不定，至少一个，至多三个
+    "taxInformation":"[{"country_residence_tax":"BELIZE","tax_identification_number":"151563112"},{"country_residence_tax":"BELIZE","tax_identification_number":"TIN disclosure not required"}]",
+    "usPerson":"yes", //"yes"或"no"
+    "usTax":"yes",  //"yes"或"no"或"" 
+    "whereMoney":"Your salary or bonus",
+    "howInvest":"Cheque deposit",
+    "distributionDetails":"1",  //"1"或"2"
+    "haveFinancialAdviser":"yes" //"yes"或"no"
 }

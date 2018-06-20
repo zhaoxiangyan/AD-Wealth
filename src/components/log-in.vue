@@ -1,5 +1,5 @@
 <template>
-  <div class="login-in">
+  <div class="log-in">
      <div class="header clearfix">
         <div>
             <h2>AD Wealth</h2>
@@ -24,13 +24,14 @@
                       <h3><Icon type="locked"></Icon>Secure account login</h3>
                       <div class="input_div">
                         <label>User name</label>
-                        <input type="text">
+                        <input type="text" v-model="username">
                       </div>
                       <div class="input_div">
                         <label>Password</label>
-                        <input :type="pwd_type?'password':'text'">
+                        <input v-model="password" :type="pwd_type?'password':'text'" >
                         <span @click="pwd_type = !pwd_type"><Icon :type="pwd_type?'eye':'eye-disabled'"></Icon></span>
                       </div>
+                      <em v-show="login_error">{{login_error_text}}</em>
                       <button @click="login">Log in<Icon type="log-in"></Icon></button>
                       <div class="clearfix"></div>
                       <router-link to="/adw/forgotten-password">Forgotten password?</router-link>
@@ -47,11 +48,16 @@
 
 <script>
 export default {
-  name: 'login-in',
+  name: 'log-in',
   data () {
     return {
-      msg: '',
-      pwd_type:true
+      username:'',
+      password:'',
+      pwd_type:true,
+      login_error:false,
+      login_error_text:'password error',
+      //   防止重复发送ajax
+      ajax:false
     }
   },
   mounted () {
@@ -59,7 +65,40 @@ export default {
   },
   methods: {
     login(){
-      this.$router.push('/adw/user');
+        var self = this;
+        let emailReg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/
+        let pswReg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/;
+        self.login_error = false;
+        if(self.username == ''||self.password == ''){
+          self.login_error_text = "can't be empty";
+          self.login_error = true;
+          return false;
+        }else if(!emailReg.test(self.username)){
+          self.login_error_text = 'username formatting error';
+          self.login_error = true;
+          return false;
+        }else if(!pswReg.test(self.password)){
+          self.login_error_text = 'password formatting error';
+          self.login_error = true;
+          return false;
+        }else{
+            if(self.ajax) return;
+            self.ajax = true;
+            self.$http.post('/user', {
+                username:self.username,
+                password:self.password
+            }).then(function (res) {
+                console.log('success');
+                console.log(res); 
+                self.ajax = false;
+            }).catch(function (err) {
+                console.log('error');
+                console.log(err);
+                self.ajax = false;
+            });
+            this.$router.push('/adw/user');
+        } 
+  
     }
   }
 }
@@ -102,6 +141,11 @@ export default {
 }
 .login_box .ivu-icon{
   margin-right:10px;
+}
+.login_box em{
+  display:block;
+  color:red;
+  font-style:normal;
 }
 .input_div{
   margin-bottom:35px;

@@ -1467,7 +1467,7 @@ export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:0,
+      tabNum:2,
       //   1
       checkbox1:false,
       checkbox2:false,
@@ -1745,8 +1745,14 @@ export default {
       },
       submit(){
           var self = this;
-        //   加入ajax向后台发送数据  是否需要返回一个NO号
-        //   self.ajax = true;
+          //   加入ajax向后台发送数据  是否需要返回一个NO号
+          let fund_value = [
+                  {"name":"equity","value":[{"k":"equity_whole","v":self.equity1},{"k":"equity_monthly","v":self.equity2}]},
+                  {"name":"balanced","value":[{"k":"balanced_whole","v":self.balanced1},{"k":"balanced_monthly","v":self.balanced2}]},
+                  {"name":"stable","value":[{"k":"stable_whole","v":self.stable1},{"k":"stable_monthly","v":self.stable2}]},
+                  {"name":"market","value":[{"k":"market_whole","v":self.market1},{"k":"market_monthly","v":self.market2}]},
+                  {"name":"total","value":[{"k":"total_whole","v":self.total_fund1},{"k":"total_monthly","v":self.total_fund2}]},
+          ];
           let tax_information_value = [];
           tax_information_value.push({"country_residence_tax":self.radio2 == 'yes'?'BELIZE':self.residence,"tax_identification_number":self.tax_number == ''?self.tax_number_reason:self.tax_number});
           if(self.radio3 == 'yes'){
@@ -1757,44 +1763,38 @@ export default {
                     }
               }
           }
-        //   self.$http.post('/user', {
-        //         equity_whole:self.equity1,
-        //         equity_monthly:self.equity2,
-        //         balanced_whole:self.balanced1,
-        //         balanced_monthly:self.balanced2,
-        //         stable_whole:self.self.stable1,
-        //         stable_monthly:self.stable2,
-        //         total_whole:self.total_fund1,
-        //         total_monthly:self.total_fund2,
-        //         title:self.title,
-        //         firstname:self.firstname,
-        //         surname:self.surname,
-        //         identification:self.passport,
-        //         birth:self.birth,
-        //         nationality:self.nation,
-        //         email:self.email,
-        //         password:self.password,
-        //         country_code:self.code,
-        //         mobile_phone:self.mobile,
-        //         residential_address:self.address,
-        //         //  数据表子表
-        //         tax_information:tax_information_value,
-        //         us_person:self.radio4,
-        //         us_tax:self.radio4 == 'yes'?self.radio5:'',
-        //         where_money:self.radio6 == '0'?self.other_text:self.radio6,
-        //         how_invest:self.select1,
-        //         distribution_details:self.radio7,
-        //         have_financial_adviser:self.radio8
-        //     }).then(function (res) {
-        //         console.log('success');
-        //         console.log(res); 
-        //         self.ajax = false;
-        //     }).catch(function (err) {
-        //         console.log('error');
-        //         console.log(err);
-        //         self.ajax = false;
-        //     });
-          self.next();
+          if(self.ajax) return;
+          self.ajax = true;
+          self.$http.post('/user', {
+                fund:JSON.stringify(fund_value),
+                title:self.title,
+                firstname:self.firstname,
+                surname:self.surname,
+                identification:self.passport,
+                birth: moment(self.birth).format(),
+                nationality:self.nation,
+                email:self.email,
+                password:self.password,
+                countryCode:self.code,
+                mobilePhone:self.mobile,
+                residentialAddress:self.address,
+                taxInformation:JSON.stringify(tax_information_value),
+                usPerson:self.radio4,
+                usTax:self.radio4 == 'yes'?self.radio5:'',
+                whereMoney:self.radio6 == '0'?self.other_text:self.radio6,
+                howInvest:self.select1,
+                distributionDetails:self.radio7,
+                haveFinancialAdviser:self.radio8
+            }).then(function (res) {
+                console.log('success');
+                console.log(res); 
+                self.ajax = false;
+            }).catch(function (err) {
+                console.log('error');
+                console.log(err);
+                self.ajax = false;
+            });
+            self.next();
       },
       print(){
           window.print();
@@ -2177,7 +2177,6 @@ p.error_text{
 .content_6>p{
     margin-bottom:10px;
 }
-.content_7{}
 .content_7 h3{
     font-size:21px;
     text-align:left;   
