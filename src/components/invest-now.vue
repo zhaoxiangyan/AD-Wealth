@@ -1467,7 +1467,7 @@ export default {
   name: 'invest-now',
   data () {
     return {
-      tabNum:2,
+      tabNum:0,
       //   1
       checkbox1:false,
       checkbox2:false,
