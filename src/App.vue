@@ -5,7 +5,7 @@
 </template>
 
 <script>
-// git提交测试
+// git提交测试test
 export default {
   name: 'App'
 }
